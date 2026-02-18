@@ -23,7 +23,7 @@
 
   
   <div class="glitch__form">
-    <form class="glitch__card">
+    <form class="glitch__card" action="/register" method="POST">
 
       <div class="card__header">
         <div class="card__title">
@@ -48,17 +48,17 @@
       <div class="card__body">
 
         <div class="form__group">
-          <input type="text" id="name" required placeholder=" " />
+          <input type="text" id="name" name="nickname" required placeholder=" " />
           <label for="name" class="form__label" data-text="ІМʼЯ">Нікнейм</label>
         </div>
 
         <div class="form__group">
-          <input type="email" id="email" required placeholder=" " />
+          <input type="email" id="email" name="email" required placeholder=" " />
           <label for="email" class="form__label" data-text="EMAIL">EMAIL</label>
         </div>
 
        <div class="form__group">
-          <select id="select" required>
+          <select id="select" name="country" required>
             <option value="" disabled selected>Оберіть країну</option>
             <option>Україна</option>
             <option>Польща</option>
@@ -68,7 +68,7 @@
         </div>
 
         <div class="form__group">
-          <select id="select" required>
+          <select id="select" name="role" required>
             <option value="" disabled selected>Оберіть роль</option>
             <option>Учасник (команда)</option>
             <option>Журі</option>
@@ -79,12 +79,12 @@
 
         <div class="form-row">
           <div class="form__group">
-            <input type="password" id="password" required placeholder=" " />
+            <input type="password" id="password" name="password" required placeholder=" " />
             <label for="password" class="form__label" data-text="ПАРОЛЬ">ПАРОЛЬ</label>
           </div>
 
           <div class="form__group">
-            <input type="password" id="confirm" required placeholder=" " />
+            <input type="password" id="confirm" name="confirm" required placeholder=" " />
             <label for="confirm" class="form__label" data-text="ПІДТВЕРДЖЕННЯ">
               ПІДТВЕРДЖЕННЯ
             </label>

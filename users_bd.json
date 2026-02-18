@@ -5,5 +5,12 @@
     "country": "Ukraine",
     "role": "ADMIN",
     "password": "admin"
+  },
+  {
+    "nickname": "snot1k",
+    "email": "arturvika123@gmail.com",
+    "country": "Україна",
+    "role": "Учасник (команда)",
+    "password": "aa"
   }
 ]
