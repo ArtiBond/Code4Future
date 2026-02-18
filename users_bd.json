@@ -1,6 +1,9 @@
 [
-    {
-        "email":"admin@admin.com",
-        "password":"admin"
-    }
+  {
+    "nickname": "Admin",
+    "email": "admin@admin.com",
+    "country": "Ukraine",
+    "role": "ADMIN",
+    "password": "admin"
+  }
 ]
