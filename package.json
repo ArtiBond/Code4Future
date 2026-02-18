@@ -24,6 +24,7 @@
     "arr-diff": "^4.0.0",
     "arr-union": "^3.1.0",
     "assign-symbols": "^1.0.0",
+    "express": "^5.2.1",
     "extend-shallow": "^3.0.2",
     "is-extendable": "^1.0.1",
     "is-plain-object": "^2.0.4",
