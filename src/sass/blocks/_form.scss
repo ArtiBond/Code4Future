@@ -1,11 +1,42 @@
 .form {
+
+
     &__row {
+        --g-bg-color: #0d0d0d;
+        --g-primary-color: #00f2ea;
+        --g-secondary-color: #f20024;
+        --g-text-color: #e5e5e5;
+        --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+        --g-glitch-anim-duration: 0.5s;
+
         grid-template-columns: 1fr;
         max-width: 520px;
     }
     &__group {
         position: relative;
         display: flex;
+        margin-bottom: 1.5rem;
+
+            --g-bg-color: #0d0d0d;
+        --g-primary-color: #00f2ea;
+        --g-secondary-color: #f20024;
+        --g-text-color: #e5e5e5;
+        --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+        --g-glitch-anim-duration: 0.5s;
+
+        @keyframes glitch__anim{
+    0%{ transform:translate(0); clip-path: inset(0 0 0 0); }
+    20%{ transform:translate(-5px,3px); clip-path: inset(50% 0 20% 0); }
+    40%{ transform:translate(3px,-2px); clip-path: inset(20% 0 60% 0); }
+    60%{ transform:translate(-4px,2px); clip-path: inset(80% 0 5% 0); }
+    80%{ transform:translate(4px,-3px); clip-path: inset(30% 0 45% 0); }
+    100%{ transform:translate(0); clip-path: inset(0 0 0 0); }
+}
+
+        &[type="text" i] {
+            padding-block: 1px;
+            padding-inline: 2px;
+        }
 
         input, select {
             width: 100%;
@@ -77,9 +108,25 @@
             animation: glitch__anim var(--g-glitch-anim-duration)
                 cubic-bezier(0.25,0.46,0.45,0.94) reverse both;
         }
+
+        select {
+            background-color: var(--g-bg-color);
+            color: var(--g-text-color);
+
+            option {
+                background-color: #111;
+                color: var(--g-text-color);
+            }
+        }
     }
 
     &__label {
+        --g-bg-color: #0d0d0d;
+        --g-primary-color: #00f2ea;
+        --g-secondary-color: #f20024;
+        --g-text-color: #e5e5e5;
+        --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+        --g-glitch-anim-duration: 0.5s;
         position:absolute;
         top: 0.75em;
         left: 0;
@@ -93,6 +140,12 @@
     }
 
     &__sbmtbutton {
+        --g-bg-color: #0d0d0d;
+        --g-primary-color: #00f2ea;
+        --g-secondary-color: #f20024;
+        --g-text-color: #e5e5e5;
+        --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+        --g-glitch-anim-duration: 0.5s;
         width:100%;
         padding: 0.85em;
         margin-top: 0.5rem;
@@ -109,14 +162,14 @@
         transition: all 0.3s;
         overflow: hidden;
 
-        :hover, :focus {
+        &:hover, &:focus {
             background-color: var(--g-primary-color);
             color: var(--g-bg-color);
             box-shadow: 0 0 25px var(--g-primary-color);
             outline: none;
         }
 
-        :active {
+        &:active {
             transform: scale(0.97);
         }
 
@@ -126,11 +179,12 @@
             transition: opacity 0.2s ease;
         }
 
-        :hover &__text {
+        &:hover, &__text {
             opacity: 0.8;
         }
 
-        ::before, ::after {
+
+        &:before, &:after {
             content: attr(data-text);
             position:absolute;
             top:0; left:0;
@@ -143,7 +197,56 @@
             transition: opacity 0.2s ease;
         }
 
-        
+        &:before, &:after {
+            content: attr(data-text);
+            position:absolute;
+            top:0; left:0;
+            width:100%; height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            opacity:0;
+            background-color: var(--g-primary-color);
+            transition: opacity 0.2s ease;
+        }
+
+        &:hover::before, &:hover::before {
+            opacity:1;
+            color: var(--g-secondary-color);
+            animation: glitch__anim var(--g-glitch-anim-duration)
+                cubic-bezier(0.25,0.46,0.45,0.94) both;
+        }
+
+        &:hover::after, &:hover::after {
+            opacity:1;
+            color: var(--g-secondary-color);
+            animation: glitch__anim var(--g-glitch-anim-duration)
+                cubic-bezier(0.25,0.46,0.45,0.94) reverse both;
+        }
+
+
+    }
+
+    &__muted {
+        --g-bg-color: #0d0d0d;
+        --g-primary-color: #00f2ea;
+        --g-secondary-color: #f20024;
+        --g-text-color: #e5e5e5;
+        --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+        --g-glitch-anim-duration: 0.5s;
+        margin-top: 12px;
+        font-size: 13px;
+        color: rgba(229,229,229,0.65);
+
+        a {
+            color: var(--g-primary-color);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
     }
 }
 

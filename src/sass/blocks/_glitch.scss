@@ -1,12 +1,13 @@
 .glitch {
-    --g-bg-color: #0d0d0d;
+    
+
+    &__form {
+        --g-bg-color: #0d0d0d;
     --g-primary-color: #00f2ea;
     --g-secondary-color: #f20024;
     --g-text-color: #e5e5e5;
     --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
     --g-glitch-anim-duration: 0.5s;
-
-    &__form {
         display:flex;
         justify-content:center;
         align-items:center;
@@ -16,6 +17,12 @@
     }
 
     &__card {
+        --g-bg-color: #0d0d0d;
+    --g-primary-color: #00f2ea;
+    --g-secondary-color: #f20024;
+    --g-text-color: #e5e5e5;
+    --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+    --g-glitch-anim-duration: 0.5s;
         background-color: var(--g-bg-color);
         width: 100%;
         max-width: 520px;                  /* під твій макет */
