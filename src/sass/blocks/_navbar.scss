@@ -1,0 +1,26 @@
+.navbar {
+    display:flex; align-items:center; justify-content:space-between;
+  padding:14px 24px;
+  background:#0b0b0e;
+  border-bottom:1px solid var(--border);
+  --g-bg-color: #0d0d0d;
+        --g-primary-color: #00f2ea;
+        --g-secondary-color: #f20024;
+        --g-text-color: #e5e5e5;
+        --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+        --g-glitch-anim-duration: 0.5s;
+    &__brand {
+        font-weight:800; 
+        letter-spacing:.6px; 
+        display:flex; 
+        gap:10px; 
+        align-items:center;
+
+        &__badge {
+            width:40px; 
+            height:40px; 
+            display:inline-block; 
+            border-radius:2px;
+        }
+    }
+}

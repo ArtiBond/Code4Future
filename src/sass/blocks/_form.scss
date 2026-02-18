@@ -137,6 +137,10 @@
         letter-spacing: 0.1em;
         pointer-events:none;
         transition: all 0.3s ease;
+
+        &[for="select"] {
+            opacity: 0;
+        }
     }
 
     &__sbmtbutton {

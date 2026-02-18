@@ -16,8 +16,8 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp styles && node index.js",
-    "dev": "gulp watch & node index.js"
+    "start": "gulp styles && node index.js"
+
   },
   "dependencies": {
     "ansi-colors": "^1.1.0",
