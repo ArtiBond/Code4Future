@@ -1,0 +1,149 @@
+.form {
+    &__row {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+    }
+    &__group {
+        position: relative;
+        display: flex;
+
+        input, select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(0, 242, 234, 0.3);
+            padding: 0.75em 0;
+            font-size: 1rem;
+            color: var(--g-text-color);
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        select {
+            appearance:none;
+            -webkit-appearance:none;
+            -moz-appearance:none;
+            padding-right: 1.6em;
+            cursor:pointer;
+        }
+
+        select::after {
+            content:"▾";
+            position:absolute;
+            right:0;
+            top:.65em;
+            color: rgba(229,229,229,.7);
+            pointer-events:none;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--g-primary-color);
+        }
+
+        input:focus + .form__label, input:not(:placeholder-shown) + .form__label {
+            top: -1.2em;
+            font-size: 0.8rem;
+            opacity: 1;
+        }
+
+        select:focus + .form__label {
+            top: -1.2em;
+            font-size: 0.8rem;
+            opacity: 1;
+        }
+
+        input:focus + .form__label::after,
+        input:focus + .form__label::before,
+        select:focus + .form__label::after,
+        select:focus + .form__label::before {
+            content: attr(data-text);
+            position:absolute;
+            top:0; left:0;
+            width:100%; height:100%;
+            background-color: var(--g-bg-color);
+        }
+
+        input:focus + .form__label::before,
+        select:focus + .form__label::before {
+            color: var(--g-secondary-color);
+            animation: glitch__anim var(--g-glitch-anim-duration)
+                cubic-bezier(0.25,0.46,0.45,0.94) both;
+        }
+
+        input:focus + .form__label::after,
+        select:focus + .form__label::after {
+            color: var(--g-primary-color);
+            animation: glitch__anim var(--g-glitch-anim-duration)
+                cubic-bezier(0.25,0.46,0.45,0.94) reverse both;
+        }
+    }
+
+    &__label {
+        position:absolute;
+        top: 0.75em;
+        left: 0;
+        font-size: 1rem;
+        color: var(--g-primary-color);
+        opacity: 0.6;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        pointer-events:none;
+        transition: all 0.3s ease;
+    }
+
+    &__sbmtbutton {
+        width:100%;
+        padding: 0.85em;
+        margin-top: 0.5rem;
+        background-color: transparent;
+        border: 2px solid var(--g-primary-color);
+        color: var(--g-primary-color);
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s;
+        overflow: hidden;
+
+        :hover, :focus {
+            background-color: var(--g-primary-color);
+            color: var(--g-bg-color);
+            box-shadow: 0 0 25px var(--g-primary-color);
+            outline: none;
+        }
+
+        :active {
+            transform: scale(0.97);
+        }
+
+        &__text {
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        :hover &__text {
+            opacity: 0.8;
+        }
+
+        ::before, ::after {
+            content: attr(data-text);
+            position:absolute;
+            top:0; left:0;
+            width:100%; height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            opacity:0;
+            background-color: var(--g-primary-color);
+            transition: opacity 0.2s ease;
+        }
+
+        
+    }
+}
+
