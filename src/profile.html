@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Профіль — RedXBattles</title>
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+
+<div class="navbar">
+   
+    <a class="brand" href="index.html"> <img src="img/logo.png"  class="brand-badge"  alt="logo"><span>RedXBattles</span></a>
+    <div class="nav-links">
+      <a href="tournaments.html">Button 1</a>
+      <a href="leaderboard.html">Button 2</a>
+      <a href="announcements.html">Button 3</a>
+    </div>
+   <label class="switch">
+  <input id="themeToggle" type="checkbox" />
+  <div class="slider round">
+    <div class="sun-moon">
+      <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+
+      <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+    </div>
+    <div class="stars">
+      <svg id="star-1" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-2" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-3" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-4" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+    </div>
+  </div>
+</label>
+
+    <div class="nav-actions">
+      <a class="btn" href="login.html">Login/profile</a>
+      
+    </div>
+  </div>
+<div class="container">
+
+  <div class="h1">Профіль користувача</div>
+  <div class="muted">Роль: <span class="badge badge-accent">Captain</span></div>
+
+  <div style="height:20px"></div>
+
+  <!-- Basic Info -->
+  <div class="card" >
+    <b>Основна інформація</b>
+    <div style="height:12px"></div>
+
+    <div class="field">
+      <label>Імʼя</label>
+      <input class="input" value="Іван Іваненко">
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <input class="input" value="ivan@email.com">
+    </div>
+
+    <button class="btn btn-primary">Зберегти зміни</button>
+  </div>
+
+  <div style="height:16px"></div>
+
+  <!-- TEAM BLOCK -->
+  <div class="card">
+    <b>Моя команда</b>
+    <div style="height:12px"></div>
+
+    <div class="muted">Назва: <b>Team Avengers</b></div>
+
+    <div style="height:10px"></div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Учасник</th>
+          <th>Email</th>
+          <th>Школа</th>
+          <th>Клас</th>
+          <th>Місто</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Іван Іваненко</td>
+          <td>captain@email.com</td>
+          <td>Школа 25</td>
+          <td>10</td>
+          <td>Київ</td>
+        </tr>
+        <tr>
+          <td>Марія Петренко</td>
+          <td>member@email.com</td>
+            <td>Школа 25</td>
+          <td>10</td>
+            <td>Київ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="height:16px"></div>
+
+   <!-- Players BLOCK -->
+  <div class="card">
+    <b>Мої турніри</b>
+    <div style="height:12px"></div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Турнір</th>
+          <th>Дата</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GayTournament</td>
+          <td>18.09.26</td>
+          <td><span class="badge badge-ok">Триває</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="height:16px"></div>
+  <!-- JURY BLOCK -->
+  <div class="card">
+    <b>Оцінені роботи (Jury)</b>
+    <div style="height:12px"></div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Команда</th>
+          <th>Завдання</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TeamX</td>
+          <td>Round 1</td>
+          <td><span class="badge badge-ok">Оцінено</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="height:16px"></div>
+
+  <!-- ADMIN BLOCK -->
+  <div class="card">
+    <b>Створені турніри (Admin)</b>
+    <div style="height:12px"></div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Назва</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CodeBattle #1</td>
+          <td><span class="badge badge-warn">Running</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+
+</body>
+<script src="../theme.js"></script>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RedXBattles</title>
+  <title>Журі — RedXBattles</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -15,8 +15,8 @@
       <a href="leaderboard.html">Button 2</a>
       <a href="announcements.html">Button 3</a>
     </div>
-   <label class="switch">
-  <input id="input" type="checkbox" checked="darkTheme" />
+    <label class="switch">
+  <input id="themeToggle" type="checkbox" />
   <div class="slider round">
     <div class="sun-moon">
       <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100">
@@ -83,62 +83,47 @@
 </label>
 
     <div class="nav-actions">
-      <a class="btn" href="login">Login/profile</a>
+      <a class="btn" href="login.html">Login/profile</a>
       
     </div>
   </div>
 
   <div class="container">
-    <div class="h1">Турніри</div>
-    <div class="muted">Активні / майбутні / завершені</div>
+    <div class="h1">Журі — призначені роботи</div>
+    <div class="muted">Оцініть свої сабміти</div>
 
     <div style="height:16px"></div>
 
-    <div class="card">
-      <div class="row">
-        <div class="field">
-          <label>Фільтр</label>
-          <select class="select">
-            <option>Усі</option>
-            <option>Registration open</option>
-            <option>Running</option>
-            <option>Finished</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Пошук</label>
-          <input class="input" placeholder="Назва турніру..." />
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-2" style="margin-top:16px;">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;gap:10px;">
-          <b>CodeBattle #1</b>
-          <span class="badge badge-warn">Registration</span>
-        </div>
-        <div class="muted" style="margin-top:8px;">Короткий опис / правила...</div>
-        <div style="margin-top:12px;display:flex;gap:10px;">
-          <a class="btn" href="tournament.html">Відкрити</a>
-          <a class="btn btn-primary" href="team-register.html">Реєстрація команди</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;gap:10px;">
-          <b>CodeBattle #0</b>
-          <span class="badge badge-ok">Finished</span>
-        </div>
-        <div class="muted" style="margin-top:8px;">Архівний турнір...</div>
-        <div style="margin-top:12px;display:flex;gap:10px;">
-          <a class="btn" href="tournament.html">Відкрити</a>
-          <a class="btn" href="leaderboard.html">Рейтинг</a>
-        </div>
-      </div>
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Турнір</th>
+          <th>Команда</th>
+          <th>Завдання</th>
+          <th>Статус</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CodeBattle #1</td>
+          <td>MyTeam</td>
+          <td>Round 1</td>
+          <td><span class="badge badge-warn">Pending</span></td>
+          <td><a class="btn btn-primary" href="jury-score.html">Оцінити</a></td>
+        </tr>
+        <tr>
+          <td>CodeBattle #1</td>
+          <td>TeamX</td>
+          <td>Round 1</td>
+          <td><span class="badge badge-ok">Done</span></td>
+          <td><a class="btn" href="jury-score.html">Переглянути</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
- 
+
 </body>
+<script src="../theme.js"></script>
 </html>

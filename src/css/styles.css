@@ -1,5 +1,6 @@
 :root{
   --bg:#0f0f12;
+  --bgw:#dddddd;
   --panel:#17181d;
   --panel2:#1e2027;
   --border:#2a2c35;
@@ -7,9 +8,28 @@
   --muted:#b9bcc7;
   --accent:#e53935;
   --accent2:#c92f2c;
-  --ok:#2ecc71;
-  --warn:#f1c40f;
+  --ok:#00a344;
+  --warn:#c58702;
 }
+
+/* ===== THEME TOGGLE ===== */
+
+/* Light theme: просто переозначаємо змінні */
+body.light {
+  --bg: var(--bgw);
+  --panel: #f2f2f2;
+  --panel2: #ffffff;
+  --border: #cfcfcf;
+  --text: #111111;
+  --muted: #4b4b4b;
+  /* акцент можеш лишити червоним */
+}
+
+/* щоб таблиці/ховери не були надто темні у light */
+body.light .navbar{ background:#f6f6f6; }
+body.light .nav-links a:hover{ background:#e9e9e9; }
+body.light .table th{ background:#efefef; }
+body.light .table tr:hover td{ background:#f3f3f3; }
 
 *{box-sizing:border-box}
 body{
@@ -45,12 +65,15 @@ a{ color:inherit; text-decoration:none; }
   background:var(--panel);
   color:var(--text);
   cursor:pointer;
+ 
 }
 .btn:hover{ filter:brightness(1.05); }
 .btn-primary{
   background:var(--accent);
   border-color:var(--accent);
   font-weight:700;
+  margin-top: 10px;
+    color:var(--panel);
 }
 .btn-primary:hover{ background:var(--accent2); }
 
@@ -59,8 +82,9 @@ a{ color:inherit; text-decoration:none; }
   border:1px solid var(--border);
   border-radius:10px;
   padding:18px;
+  margin-top: 10px;
 }
-.card + .card{ margin-top:16px; }
+
 
 .grid{ display:grid; gap:16px; }
 .grid-2{ grid-template-columns: 1fr 1fr; }
@@ -69,7 +93,7 @@ a{ color:inherit; text-decoration:none; }
 .h1{ font-size:26px; margin:0 0 8px; }
 .muted{ color:var(--muted); }
 
-.field label{ display:block; font-size:13px; color:var(--muted); margin:0 0 6px; }
+.field label{ display:block; font-size:13px; color:var(--muted); margin:6px 0 6px 6px; }
 .input, .select, .textarea{
   width:100%;
   padding:10px 12px;
@@ -406,7 +430,7 @@ a{ color:inherit; text-decoration:none; }
   background-color: #111;
   color: var(--g-text-color);
 }
-/* From Uiverse.io by mRcOol7 */ 
+
 
 .googlein {
     display: flex;
@@ -469,7 +493,6 @@ button:hover .google-icon {
 
 
 
-/* From Uiverse.io by RiccardoRapelli */ 
 .switch {
   position: relative;
   display: inline-block;
@@ -480,7 +503,7 @@ button:hover .google-icon {
 }
 
 
-.switch #input {
+.switch #themeToggle {
   opacity: 0;
   width: 0;
   height: 0;
@@ -512,15 +535,15 @@ button:hover .google-icon {
   transition: 0.4s;
 }
 
-#input:checked + .slider {
+#themeToggle:checked + .slider {
   background-color: black;
 }
 
-#input:focus + .slider {
+#themeToggle:focus + .slider {
   box-shadow: 0 0 1px #2196f3;
 }
 
-#input:checked + .slider .sun-moon {
+#themeToggle:checked + .slider .sun-moon {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -535,7 +558,7 @@ button:hover .google-icon {
   fill: gray;
 }
 
-#input:checked + .slider .sun-moon .moon-dot {
+#themeToggle:checked + .slider .sun-moon .moon-dot {
   opacity: 1;
 }
 
@@ -694,7 +717,7 @@ button:hover .google-icon {
   animation-iteration-count: infinite;
 }
 
-#input:checked + .slider .stars {
+#themeToggle:checked + .slider .stars {
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
@@ -745,3 +768,145 @@ button:hover .google-icon {
     transform: scale(1);
   }
 }
+
+
+
+
+
+
+
+
+/*ADDED IN 2026-19-02 By Sh3va in Algebra   FILE INPUTER*/
+
+.container-folder {
+  --transition: 350ms;
+  --folder-W: 120px;
+  --folder-H: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  background: linear-gradient(135deg, #f162ba, #ed45ae);
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  height: calc(var(--folder-H) * 1.7);
+  position: relative;
+}
+
+.folder {
+  position: absolute;
+  top: -20px;
+  left: calc(50% - 60px);
+  animation: float 2.5s infinite ease-in-out;
+  transition: transform var(--transition) ease;
+}
+
+.folder:hover {
+  transform: scale(1.05);
+}
+
+.folder .front-side,
+.folder .back-side {
+  position: absolute;
+  transition: transform var(--transition);
+  transform-origin: bottom center;
+}
+
+.folder .back-side::before,
+.folder .back-side::after {
+  content: "";
+  display: block;
+  background-color: white;
+  opacity: 0.5;
+  z-index: 0;
+  width: var(--folder-W);
+  height: var(--folder-H);
+  position: absolute;
+  transform-origin: bottom center;
+  border-radius: 15px;
+  transition: transform 350ms;
+  z-index: 0;
+}
+
+.container-folder:hover .back-side::before {
+  transform: rotateX(-5deg) skewX(5deg);
+}
+.container-folder:hover .back-side::after {
+  transform: rotateX(-15deg) skewX(12deg);
+}
+
+.folder .front-side {
+  z-index: 1;
+}
+
+.container:hover .front-side {
+  transform: rotateX(-40deg) skewX(15deg);
+}
+
+.folder .tip {
+  background: linear-gradient(135deg, #ff9a56, #ff6f56);
+  width: 80px;
+  height: 20px;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -10px;
+  z-index: 2;
+}
+
+.folder .cover {
+  background: linear-gradient(135deg, #ffe563, #ffc663);
+  width: var(--folder-W);
+  height: var(--folder-H);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.custom-file-upload {
+  font-size: 1.1em;
+  color: #ffffff;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background var(--transition) ease;
+  display: inline-block;
+  width: 100%;
+  padding: 10px 35px;
+  position: relative;
+}
+
+.custom-file-upload:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+
+
+
+
+
+
+
+
