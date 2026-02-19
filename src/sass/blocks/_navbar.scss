@@ -9,6 +9,7 @@
         --g-text-color: #e5e5e5;
         --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
         --g-glitch-anim-duration: 0.5s;
+        align-items: center;
 
         body.light {
   --bg: var(--bgw);
@@ -41,6 +42,8 @@ body.light .navbar {
     body.light &__links a:hover{ background:#e9e9e9; }
 
     &__links {
+        align-items: center;
+        display: flex;
         a:hover {
             background:#14151a; color:var(--text);
         }
