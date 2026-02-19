@@ -1,5 +1,6 @@
 :root{
   --bg:#0f0f12;
+  --bgw:#dddddd;
   --panel:#17181d;
   --panel2:#1e2027;
   --border:#2a2c35;
@@ -7,8 +8,8 @@
   --muted:#b9bcc7;
   --accent:#e53935;
   --accent2:#c92f2c;
-  --ok:#2ecc71;
-  --warn:#f1c40f;
+  --ok:#00a344;
+  --warn:#c58702;
 }
 
 *{box-sizing:border-box}
@@ -21,6 +22,9 @@ body{
 
 a{ color:inherit; text-decoration:none; }
 
+.h1 {
+  font-size:26px; margin:0 0 8px;
+}
 
 
 
@@ -29,3 +33,8 @@ a{ color:inherit; text-decoration:none; }
 @import 'blocks/_form.scss';
 @import 'blocks/_navbar.scss';
 @import 'blocks/_google.scss';
+@import 'blocks/_btn.scss';
+@import 'blocks/_table.scss';
+@import 'blocks/_grid.scss';
+@import 'blocks/_badge.scss';
+@import 'blocks/_container.scss';

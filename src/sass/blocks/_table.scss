@@ -1,0 +1,39 @@
+.table {
+    body.light {
+  --bg: var(--bgw);
+  --panel: #f2f2f2;
+  --panel2: #ffffff;
+  --border: #cfcfcf;
+  --text: #111111;
+  --muted: #4b4b4b;
+  /* акцент можеш лишити червоним */
+}
+
+    width:100%;
+  border-collapse:collapse;
+  overflow:hidden;
+  border-radius:10px;
+  border:1px solid var(--border);
+
+    body.light th {
+        background:#efefef;
+    }
+
+    body.light tr:hover td {
+        background:#f3f3f3;
+    }
+
+    th, td {
+        padding:12px 10px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+    }
+
+    th {
+        background:#121319; color:var(--muted); font-weight:700; font-size:13px;
+    }
+
+    tr:hover td {
+        background:#14151a;
+    }
+}

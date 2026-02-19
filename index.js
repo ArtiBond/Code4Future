@@ -10,12 +10,52 @@ app.use(express.static(path.join(__dirname, "src")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "src", "tours.html"));
+app.get("/tornaments", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "tournaments.html"));
 });
 
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "src", "login.html"));
+});
+
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "admin.html"));
+});
+
+app.get("/announcements", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "announcements.html"));
+});
+
+app.get("/index", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "index.html"));
+});
+
+app.get("/juryProfile", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "juryProfile.html"));
+});
+
+app.get("/juryRated", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "juryRated.html"));
+});
+
+app.get("/leaderboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "leaderboard.html"));
+});
+
+app.get("/profile", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "profile.html"));
+});
+
+app.get("/submission", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "submission.html"));
+});
+
+app.get("/team-register", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "team-register.html"));
+});
+
+app.get("/tournament", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "tournament.html"));
 });
 
 app.post("/login", (req, res) => {

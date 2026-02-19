@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Головна — RedXBattles</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/style.min.css">
 </head>
 <body>
 
   <!-- NAV -->
   <div class="navbar">
    
-    <a class="brand" href="index.html"> <img src="img/logo.png"  class="brand-badge"  alt="logo"><span>RedXBattles</span></a>
-    <div class="nav-links">
+    <a class="navbar__brand" href="index.html"> <img src="img/logo.png"  class="brand-badge"  alt="logo"><span>RedXBattles</span></a>
+    <div class="navbar__links">
       <a href="tournaments.html">Button 1</a>
       <a href="leaderboard.html">Button 2</a>
       <a href="announcements.html">Button 3</a>
@@ -99,7 +100,7 @@
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
         <div>
           <b style="font-size:16px;">Ваш статус</b>
-          <div class="muted" style="font-size:13px;margin-top:6px;">
+          <div class="form__muted" style="font-size:13px;margin-top:6px;">
             Швидкий доступ: турнір • завдання • сабміт
           </div>
         </div>
@@ -114,9 +115,9 @@
         <div class="card" style="margin:0;">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
             <b>Ваш турнір</b>
-            <span class="badge badge-accent">Running</span>
+            <span class="badge badge__accent">Running</span>
           </div>
-          <div class="muted" style="margin-top:8px;">CodeBattle #1</div>
+          <div class="form__muted" style="margin-top:8px;">CodeBattle #1</div>
           <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
             <a class="btn" href="tournament.html">Перейти</a>
             <a class="btn" href="leaderboard.html">Leaderboard</a>
@@ -126,12 +127,12 @@
         <div class="card" style="margin:0;">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
             <b>Ваше завдання</b>
-            <span class="badge badge-warn">Active</span>
+            <span class="badge badge__warn">Active</span>
           </div>
-          <div class="muted" style="margin-top:8px;">Round 1 — API Platform</div>
-          <div class="muted" style="margin-top:4px;font-size:13px;">Дедлайн: 01.03.2026 20:00</div>
+          <div class="form__muted" style="margin-top:8px;">Round 1 — API Platform</div>
+          <div class="form__muted" style="margin-top:4px;font-size:13px;">Дедлайн: 01.03.2026 20:00</div>
           <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-            <a class="btn btn-primary" href="submission.html">Подати рішення</a>
+            <a class="btn btn__primary" href="submission.html">Подати рішення</a>
             <a class="btn" href="task.html">Деталі</a>
           </div>
         </div>
@@ -142,9 +143,9 @@
       <div class="card" style="margin:0;">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
           <b>Ваш сабміт</b>
-          <span class="badge badge-accent">Не подано</span>
+          <span class="badge badge__accent">Не подано</span>
         </div>
-        <div class="muted" style="margin-top:8px;font-size:13px;">
+        <div class="form__muted" style="margin-top:8px;font-size:13px;">
           До дедлайну можна редагувати. Після дедлайну — сабміт блокується.
         </div>
         <div style="margin-top:12px;">
@@ -156,7 +157,7 @@
     <!-- FILTERS -->
     <div class="card">
       <b style="font-size:16px;">Фільтри</b>
-      <div class="muted" style="font-size:13px;margin-top:6px;">
+      <div class="form__muted" style="font-size:13px;margin-top:6px;">
         Швидко показати потрібні турніри
       </div>
 
@@ -164,7 +165,7 @@
 
       <!-- чисто дизайн, без JS -->
       <div class="row" style="flex-wrap:wrap;">
-        <a class="btn btn-primary" href="#">Усі</a>
+        <a class="btn btn__primary" href="#">Усі</a>
         <a class="btn" href="#">Registration open</a>
         <a class="btn" href="#">Running</a>
         <a class="btn" href="#">Finished</a>
@@ -172,16 +173,16 @@
     </div>
 
     <!-- LISTS -->
-    <div class="grid grid-2">
+    <div class="grid grid__2">
 
       <!-- Registration -->
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
           <div>
             <b style="font-size:16px;">Майбутні турніри</b>
-            <div class="muted" style="margin-top:6px;font-size:13px;">Відкрита реєстрація або скоро старт</div>
+            <div class="form__muted" style="margin-top:6px;font-size:13px;">Відкрита реєстрація або скоро старт</div>
           </div>
-          <span class="badge badge-warn">Registration open</span>
+          <span class="badge badge__warn">Registration open</span>
         </div>
 
         <div style="height:12px;"></div>
@@ -189,13 +190,13 @@
         <div class="card" style="margin:0;">
           <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">
             <b>CodeBattle #2</b>
-            <span class="badge badge-warn">Registration</span>
+            <span class="badge badge__warn">Registration</span>
           </div>
-          <div class="muted" style="margin-top:8px;font-size:13px;">
+          <div class="form__muted" style="margin-top:8px;font-size:13px;">
             Реєстрація: 20.02.2026 — 25.02.2026
           </div>
           <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-            <a class="btn btn-primary" href="team-register.html">Реєстрація команди</a>
+            <a class="btn btn__primary" href="team-register.html">Реєстрація команди</a>
             <a class="btn" href="tournament.html">Деталі</a>
           </div>
         </div>
@@ -207,9 +208,9 @@
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
           <div>
             <b style="font-size:16px;">Активні турніри</b>
-            <div class="muted" style="margin-top:6px;font-size:13px;">Турніри, де зараз тривають раунди</div>
+            <div class="form__muted" style="margin-top:6px;font-size:13px;">Турніри, де зараз тривають раунди</div>
           </div>
-          <span class="badge badge-accent">Running</span>
+          <span class="badge badge__accent">Running</span>
         </div>
 
         <div style="height:12px;"></div>
@@ -217,9 +218,9 @@
         <div class="card" style="margin:0;">
           <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">
             <b>CodeBattle #1</b>
-            <span class="badge badge-accent">Running</span>
+            <span class="badge badge__accent">Running</span>
           </div>
-          <div class="muted" style="margin-top:8px;font-size:13px;">
+          <div class="form__muted" style="margin-top:8px;font-size:13px;">
             Активне завдання: Round 1 • дедлайн 01.03.2026
           </div>
           <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
@@ -236,9 +237,9 @@
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
         <div>
           <b style="font-size:16px;">Завершені турніри</b>
-          <div class="muted" style="margin-top:6px;font-size:13px;">Архів + результати</div>
+          <div class="form__muted" style="margin-top:6px;font-size:13px;">Архів + результати</div>
         </div>
-        <span class="badge badge-ok">Finished</span>
+        <span class="badge badge__ok">Finished</span>
       </div>
 
       <div style="height:12px;"></div>
@@ -267,7 +268,7 @@
           <tr>
             <td>CodeBattle Summer</td>
             <td>2025</td>
-            <td><span class="badge badge-ok">Finished</span></td>
+            <td><span class="badge badge__ok">Finished</span></td>
             <td>
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <a class="btn" href="tournament.html">Відкрити</a>

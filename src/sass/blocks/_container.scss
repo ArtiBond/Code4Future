@@ -1,0 +1,34 @@
+.container {
+    max-width:1100px; margin:0 auto; padding:24px;
+
+    &__folder {
+        --transition: 350ms;
+  --folder-W: 120px;
+  --folder-H: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  background: linear-gradient(135deg, #f162ba, #ed45ae);
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  height: calc(var(--folder-H) * 1.7);
+  position: relative;
+
+
+        &:hover .back-side::before {
+            transform: rotateX(-5deg) skewX(5deg);
+        }
+
+        &:hover .back-side::after {
+            transform: rotateX(-15deg) skewX(12deg);
+        }
+
+
+    }
+
+    &:hover .front-side {
+        transform: rotateX(-40deg) skewX(15deg);
+    }
+}
