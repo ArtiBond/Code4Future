@@ -253,5 +253,31 @@
         }
 
     }
+
+    &__field {
+        label {
+            display:block; font-size:13px; color:var(--muted); margin:6px 0 6px 6px;
+        }
+    }
+
+    &__select, &__input, &__textarea {
+        width:100%;
+  padding:10px 12px;
+  border-radius:6px;
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:var(--text);
+    }
+
+    &__textarea {
+        resize: vertical;
+        min-height:100px;
+    }
+
+    &__input[type="number"]::-webkit-outer-spin-button,
+&__input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 }
 

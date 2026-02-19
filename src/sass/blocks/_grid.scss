@@ -4,5 +4,13 @@
     &__2 {
         grid-template-columns: 1fr 1fr;
     }
+
+    &__row{
+        display:flex; gap:12px;
+    }
+
+    &__row >* {
+        flex:1;
+    }
 }
 @media (max-width: 860px){ .grid-2{ grid-template-columns:1fr; }}

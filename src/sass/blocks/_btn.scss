@@ -5,6 +5,7 @@
   background:var(--panel);
   color:var(--text);
   cursor:pointer;
+  
 
   &:hover {
     filter:brightness(1.05);
@@ -16,6 +17,7 @@
   font-weight:700;
   margin-top: 10px;
     color:var(--panel);
+    
   }
     &:hover {
       background:var(--accent2);

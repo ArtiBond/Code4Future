@@ -1,4 +1,4 @@
-const toggle = document.getElementById("themeToggle");
+﻿const toggle = document.getElementById("themeToggle");
   const KEY = "theme"; // "dark" або "light"
 
   function applyTheme(theme) {
@@ -20,4 +20,3 @@ const toggle = document.getElementById("themeToggle");
     localStorage.setItem(KEY, theme);
     applyTheme(theme);
   });
-

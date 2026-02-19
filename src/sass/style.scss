@@ -10,6 +10,12 @@
   --accent2:#c92f2c;
   --ok:#00a344;
   --warn:#c58702;
+  --g-bg-color: #0d0d0d;
+        --g-primary-color: #00f2ea;
+        --g-secondary-color: #f20024;
+        --g-text-color: #e5e5e5;
+        --g-font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+        --g-glitch-anim-duration: 0.5s;
 }
 
 *{box-sizing:border-box}
@@ -38,3 +44,4 @@ a{ color:inherit; text-decoration:none; }
 @import 'blocks/_grid.scss';
 @import 'blocks/_badge.scss';
 @import 'blocks/_container.scss';
+@import 'blocks/_switch.scss';
