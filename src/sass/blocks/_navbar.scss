@@ -11,19 +11,9 @@
         --g-glitch-anim-duration: 0.5s;
         align-items: center;
 
-        body.light {
-  --bg: var(--bgw);
-  --panel: #f2f2f2;
-  --panel2: #ffffff;
-  --border: #cfcfcf;
-  --text: #111111;
-  --muted: #4b4b4b;
-  /* акцент можеш лишити червоним */
-}
 
-body.light .navbar {
-    background:#f6f6f6;
-}
+
+
     &__brand {
         flex: 1;
         font-weight:800; 
@@ -67,4 +57,10 @@ body.light .navbar {
   align-items: center;
   
     }
+    .header-frame{
+  width: 70px;
+  height: 40px;
+  border: none;
+  overflow: hidden; /* головне */
+}
 }

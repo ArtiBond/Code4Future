@@ -12,6 +12,7 @@
   }
 
   &__slider {
+     border-radius: 34px;
     position: absolute;
   cursor: pointer;
   top: 0;
@@ -23,16 +24,12 @@
   transition: 0.4s;
   z-index: 0;
   overflow: hidden;
-    .round {
-        border-radius: 34px;
-
-        .switch__sun-moon {
-            border-radius: 50%;
-        }
-    }
+    
   }
+  
   &__sun-moon {
-    position: absolute;
+    position: absolute; 
+    border-radius: 50%;
   content: "";
   height: 26px;
   width: 26px;

@@ -18,6 +18,19 @@
         --g-glitch-anim-duration: 0.5s;
 }
 
+  body.light {
+  --bg: var(--bgw);
+  --panel: #f2f2f2;
+  --panel2: #ffffff;
+  --border: #cfcfcf;
+  --text: #111111;
+  --muted: #4b4b4b;
+}
+body.light .navbar{ background:#f6f6f6; }
+body.light .nav-links a:hover{ background:#e9e9e9; }
+body.light .table th{ background:#efefef; }
+body.light .table tr:hover td{ background:#f3f3f3; }
+
 *{box-sizing:border-box}
 body{
   margin:0;
