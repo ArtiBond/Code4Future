@@ -5,22 +5,29 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start" : "node index.js && gulp watch"
+    "start": "gulp styles && node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "browser-sync": "^3.0.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^10.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.1.0",
+    "gulp-sass": "^6.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.8",
     "mongoose": "^5.12.11",
     "nodemailer": "^6.6.1",
+    "sass": "^1.97.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
