@@ -41,7 +41,7 @@
 <div class="container">
 
   <div class="h1">Профіль користувача</div>
-  <div class="form__muted">Роль: <span class="badge badge-accent">Captain</span></div>
+  <div class="form__muted">Роль: <span id="profile-role" class="badge badge-accent">Captain</span></div>
 
   <div style="height:20px"></div>
 
@@ -52,12 +52,12 @@
 
     <div class="form__field">
       <label>Імʼя</label>
-      <input class="form__input" value="Іван Іваненко">
+      <input id="profile-name" class="form__input" value="">
     </div>
 
     <div class="form__field">
       <label>Email</label>
-      <input class="form__input" value="ivan@email.com">
+      <input id="profile-email" class="form__input" value="">
     </div>
 
     <button class="btn btn__primary">Зберегти зміни</button>
@@ -181,4 +181,6 @@
 
 </body>
 <script src="js/theme.js" defer></script>
+<script src="js/auth.js" defer></script>
+<script src="js/profile.js" defer></script>
 </html>

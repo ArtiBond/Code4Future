@@ -70,6 +70,16 @@ class UserController {
     async leaderboardPage(req, res, next) {     
         res.sendFile(path.join(__dirname, "../../src", "leaderboard.html"));
     }
+    async getMe(req, res, next) {
+        try {
+            // user data attached by authMiddleware
+            const user = req.user;
+            return res.json(user);
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async profilePage(req, res, next) {
         res.sendFile(path.join(__dirname, "../../src", "profile.html"));
     }
