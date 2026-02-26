@@ -7,16 +7,22 @@ const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
 
 class UserService {
-    async registration(email, password) {
+    async registration(name, email, password, country, role) {
+        if (!email || !password || !name || !country || !role) {
+            throw ApiError.BadRequest('Name, country, role, email and password are required')
+        }
+
         const candidate = await UserModel.findOne({email})
         if (candidate) {
             throw ApiError.BadRequest(`User with email ${email} already exists`)
         }
-        const hashPassword = await bcrypt.hash(password, 3);
 
-        const user = await UserModel.create({email, password: hashPassword})
+        const saltRounds = 10;
+        const hashPassword = await bcrypt.hash(password, saltRounds);
 
-        const userDto = new UserDto(user); // id, email, isActivated
+        const user = await UserModel.create({name, email, country, role, password: hashPassword})
+
+        const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto});
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
 

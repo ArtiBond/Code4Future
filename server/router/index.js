@@ -11,7 +11,21 @@ router.post('/registration',
 );
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
+router.post('/register', userController.registration);
 router.get('/refresh', userController.refresh);
-router.get('/users', authMiddleware, userController.getUsers);
+
+
+
+router.get('', userController.homePage);
+router.get('/login', userController.loginPage);
+router.get('/register', userController.registerPage);
+router.get('/admin', userController.adminPage);
+router.get('/leaderboard', userController.leaderboardPage);
+router.get('/profile', userController.profilePage);
+router.get('/submission', userController.submissionPage);
+router.get('/team-reg', userController.teamRegPage);
+router.get('/tournament', userController.tournamentPage);
+router.get('/tournaments', userController.tournamentsPage);
+router.get('/announcements', userController.announcementsPage);
 
 module.exports = router

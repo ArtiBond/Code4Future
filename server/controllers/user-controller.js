@@ -1,3 +1,4 @@
+const path = require('path');
 const userService = require('../service/user-service');
 const {validationResult} = require('express-validator');
 const ApiError = require('../exceptions/api-error');
@@ -9,8 +10,9 @@ class UserController {
             if (!errors.isEmpty()) {
                 return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
             }
-            const {email, password} = req.body;
-            const userData = await userService.registration(email, password);
+            const {nickname, email, password, country, role} = req.body;
+            const name = nickname || req.body.name;
+            const userData = await userService.registration(name, email, password, country, role);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData);
         } catch (e) {
@@ -23,6 +25,7 @@ class UserController {
             const {email, password} = req.body;
             const userData = await userService.login(email, password);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            console.log(userData);
             return res.json(userData);
         } catch (e) {
             next(e);
@@ -51,15 +54,40 @@ class UserController {
         }
     }
 
-    async getUsers(req, res, next) {
-        try {
-            const users = await userService.getAllUsers();
-            return res.json(users);
-        } catch (e) {
-            next(e);
-        }
+
+    async homePage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "index.html"));
+    }
+    async loginPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "login.html"));
+    }
+    async registerPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "register.html"));
+    }
+    async adminPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "admin.html"));
+    }
+    async leaderboardPage(req, res, next) {     
+        res.sendFile(path.join(__dirname, "../../src", "leaderboard.html"));
+    }
+    async profilePage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "profile.html"));
+    }
+    async submissionPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "submission.html"));
+    }
+    async teamRegPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "team-register.html"));
+    }
+    async tournamentPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "tournament.html"));
+    }
+    async tournamentsPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "tournaments.html"));
+    }
+    async announcementsPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "announcements.html"));
     }
 }
-
 
 module.exports = new UserController();
