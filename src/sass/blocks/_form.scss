@@ -103,7 +103,7 @@
             color: var(--text);
 
             option {
-                background-color: #111;
+                background-color: var(--bg);
                 color: var(--text);
             }
         }
@@ -239,7 +239,7 @@
   padding:10px 12px;
   border-radius:6px;
   border:1px solid var(--border);
-  background:var(--panel2);
+  background:var(--bg);
   color:var(--text);
     }
 
