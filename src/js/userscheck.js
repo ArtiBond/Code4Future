@@ -15,22 +15,38 @@ if (token && user) {
    btn2.textContent='Склад журі';
    btn3.textContent='Створити турнір';
 
+   btn1.href='/touranments';
+   btn2.href='/juryProfile';
+   btn3.href='/admin';
+
   }
   if(user_role === 'Журі') {
     btn1.textContent='Турніри';
     btn2.textContent='Оцінювання робіт';
     btn3.textContent='Результати';
 
+    btn1.href='/tournaments';
+    btn2.href='/juryRated';
+    btn3.href='/leaderboard';
+
   }
   if(user_role === 'Учасник') {
     btn1.textContent='Турніри';
     btn2.textContent='Таблиця лідерів';
     btn3.textContent='Ваша команда';
+
+    btn1.href='/tournaments';
+    btn2.href='/leaderboard';
+    btn3.href='/profile';
   }
   if(user_role === 'Капітан') {
     btn1.textContent='Турніри';
     btn2.textContent='Таблиця лідерів';
     btn3.textContent='Моя команда';
+
+     btn1.href='/tournaments';
+    btn2.href='/leaderboard';
+    btn3.href='/team-register';
   }
 }
 

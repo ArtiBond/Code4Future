@@ -81,4 +81,19 @@ if (logoutBtn) {
     }
   });
 }
+
+async function getFlag(countryName) {
+  const res = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+  const data = await res.json();
+
+  const flag = document.getElementById('flag');
+  const flagUrl = data[0].flags.svg;
+ flag.style.backgroundImage = url(flagUrl);
+ flag.style.backgroundSize = "cover";
+ flag.style.backgroundPosition = "center";
+
+  return flagUrl;
+}
+
+getFlag('Ukraine');
 });
