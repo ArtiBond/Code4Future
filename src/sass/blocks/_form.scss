@@ -3,7 +3,7 @@
 
     &__row {
 
-
+        flex-wrap:wrap;gap:10px;display:flex;margin-top:12px;align-items: flex-end;
         grid-template-columns: 1fr;
         max-width: 520px;
     }
@@ -213,6 +213,7 @@
     &__muted {
         
         margin-top: 12px;
+        margin-bottom: 12px;
         font-size: 13px;
         color: rgba(229,229,229,0.65);
         color:var(--muted);
