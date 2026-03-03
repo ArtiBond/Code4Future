@@ -37,15 +37,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('jury-block').style.display = 'none';
        document.getElementById('player-block').style.display = 'none';
         document.getElementById('team-block').style.display = 'none';
+        
     }
      if (user.role === 'Журі') {
       document.getElementById('admin-block').style.display = 'none';
        document.getElementById('player-block').style.display = 'none';
        document.getElementById('team-block').style.display = 'none';
+       
     }
      if (user.role === 'Учасник') {
       document.getElementById('admin-block').style.display = 'none';
        document.getElementById('jury-block').style.display = 'none';
+          document.getElementById('cap-block').style.display = 'none';
+    }
+    if (user.role === 'Капітан') {
+      document.getElementById('admin-block').style.display = 'none';
+       document.getElementById('jury-block').style.display = 'none';
+       document.getElementById('cap-edit').style.display = 'none';
     }
   } catch (err) {
     console.error('Failed to fetch user data', err);
