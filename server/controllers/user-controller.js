@@ -84,7 +84,9 @@ class UserController {
   }
 }
 
-
+    async teamRegPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "team-register.html"));
+    }
     async juryRatedPage(req, res, next) {
         res.sendFile(path.join(__dirname, "../../src", "juryRated.html"));
     }

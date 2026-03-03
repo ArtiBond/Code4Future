@@ -41,9 +41,10 @@ router.get('/profile', userController.profilePage);
 router.get('/submission', userController.submissionPage);
 router.get('/team-reg', userController.teamRegPage);
 router.get('/tournament', userController.tournamentPage);
-router.get('/tournaments', userController.tournamentsPage);
+router.get('/tournamentes', userController.tournamentsPage);
 router.get('/announcements', userController.announcementsPage);
 router.get('/juryRated', userController.juryRatedPage);
 router.get('/juryProfile', userController.juryProfilePage); 
+router.get('/team-register', userController.teamRegPage);
 
 module.exports = router
