@@ -33,7 +33,7 @@
     <div class="nav__actions">
       <a class="btn" href="login.html" id="btn-login">Login</a>
       <a class="btn btn__primary" href="profile.html" style="border-radius: 50%; display: none;" id="btn-profile">P</a>
-      
+    
     </div>  
 
   </div>
@@ -41,9 +41,11 @@
 </div>
 <div class="container">
 
-  <div class="h1">Профіль користувача</div>
+  <div class="h1" style="display: flex;
+    align-items: center;
+    justify-content: space-between;">Профіль користувача <a class="btn btn__primary" id="btn-logout" style="font-size: 14px;">Logout</a></div>
   <div class="form__muted">Роль: <span id="profile-role" class="badge badge__accent">Role</span></div>
-
+ 
   <div style="height:20px"></div>
 
   <!-- Basic Info -->
@@ -52,7 +54,7 @@
     <div style="height:12px"></div>
 
     <div class="form__field">
-      <label>Імʼя</label>
+      <label>Ім'я</label>
       <input id="profile-name" class="form__input" value="">
     </div>
 
@@ -187,3 +189,4 @@
 <script src="js/userscheck.js" defer></script>
 <script src="js/authFetch.js" defer></script>
 </html>
+

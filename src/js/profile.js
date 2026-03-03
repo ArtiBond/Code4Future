@@ -51,4 +51,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Failed to fetch user data', err);
    // window.location.href = '/login';
   }
+
+  const logoutBtn = document.getElementById('btn-logout');
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', async () => {
+    try {
+      await fetch('/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+
+      // очищаємо фронт
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
+      // редірект
+      window.location.href = '/login';
+    } catch (err) {
+      console.error('Logout error:', err);
+    }
+  });
+}
 });
