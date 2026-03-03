@@ -8,6 +8,7 @@ const tournamentRouter = require('./tournament-router');
 
 router.use('/tournaments', tournamentRouter);
 
+
 module.exports = router;
 
 // original '/registration' kept for compatibility but redirects to '/register'
@@ -41,7 +42,7 @@ router.get('/profile', userController.profilePage);
 router.get('/submission', userController.submissionPage);
 router.get('/team-reg', userController.teamRegPage);
 router.get('/tournament', userController.tournamentPage);
-router.get('/tournamentes', userController.tournamentsPage);
+router.get('/tournamentes', userController.tournamentesPage);
 router.get('/announcements', userController.announcementsPage);
 router.get('/juryRated', userController.juryRatedPage);
 router.get('/juryProfile', userController.juryProfilePage); 

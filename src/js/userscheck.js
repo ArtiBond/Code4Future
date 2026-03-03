@@ -15,7 +15,7 @@ if (token && user) {
    btn2.textContent='Склад журі';
    btn3.textContent='Створити турнір';
 
-   btn1.href='/touranments';
+   btn1.href='/tournamentes';
    btn2.href='/juryProfile';
    btn3.href='/admin';
 
@@ -25,7 +25,7 @@ if (token && user) {
     btn2.textContent='Оцінювання робіт';
     btn3.textContent='Результати';
 
-    btn1.href='/tournaments';
+    btn1.href='/tournamentes';
     btn2.href='/juryRated';
     btn3.href='/leaderboard';
 
@@ -35,7 +35,7 @@ if (token && user) {
     btn2.textContent='Таблиця лідерів';
     btn3.textContent='Ваша команда';
 
-    btn1.href='/tournaments';
+    btn1.href='/tournamentes';
     btn2.href='/leaderboard';
     btn3.href='/profile';
   }
@@ -44,7 +44,7 @@ if (token && user) {
     btn2.textContent='Таблиця лідерів';
     btn3.textContent='Моя команда';
 
-     btn1.href='/tournaments';
+     btn1.href='/tournamentes';
     btn2.href='/leaderboard';
     btn3.href='/team-register';
   }

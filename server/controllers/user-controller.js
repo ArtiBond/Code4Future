@@ -130,8 +130,8 @@ class UserController {
     async tournamentPage(req, res, next) {
         res.sendFile(path.join(__dirname, "../../src", "tournament.html"));
     }
-    async tournamentsPage(req, res, next) {
-        res.sendFile(path.join(__dirname, "../../src", "tournaments.html"));
+    async tournamentesPage(req, res, next) {
+        res.sendFile(path.join(__dirname, "../../src", "tournamentes.html"));
     }
     async announcementsPage(req, res, next) {
         res.sendFile(path.join(__dirname, "../../src", "announcements.html"));

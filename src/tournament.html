@@ -41,7 +41,7 @@
   <div class="container">
     <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
       <div>
-        <div class="h1">CodeBattle #1</div>
+        <div class="h1" id="nameTOUR">CodeBattle #1</div>
         <div class="form__muted">Статус: <span class="badge badge__warn">Running</span></div>
       </div>
       <a class="btn" href="leaderboard.html">Leaderboard</a>
@@ -96,4 +96,46 @@
 </body>
 <script src="js/theme.js" defer></script>
 <script src="js/userscheck.js" defer></script>
+<!--<script src="js/tour.js" defer></script> -->
+
+<script>
+async function loadTournament() {
+  const id = new URLSearchParams(location.search).get("id");
+  if (!id) {
+    document.body.innerHTML = "<h2>Missing id</h2>";
+    return;
+  }
+
+  const res = await fetch("http://localhost:5000/tournaments");
+  if (!res.ok) throw new Error("Failed to load tournaments");
+
+  const list = await res.json(); // очікуємо масив
+
+  // ВАЖЛИВО: що саме у тебе є “id” в об’єкті?
+  // може бути: item._id, item.id, item.tournamentId
+  const t = list.find(item =>
+    String(item._id ?? item.id ?? item.tournamentId ?? id) === String(id)
+  );
+
+  if (!t) {
+    document.body.innerHTML = "<h2>Tournament not found</h2>";
+    return;
+  }
+
+  // приклад рендеру
+  document.getElementById("name").textContent = t.name || "Unnamed";
+  document.getElementById("description").textContent = JSON.stringify(t, null, 2);
+}
+
+document.getElementById("nameTOUR") = t.name;
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadTournament().catch(err => {
+    document.body.innerHTML = `<h2>Error</h2><pre>${err.message}</pre>`;
+  });
+});
+</script>
+
+<h1 id="title">Loading…</h1>
+<pre id="raw"></pre>
 </html>

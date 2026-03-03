@@ -14,7 +14,7 @@ async function loadTournaments() {
   for (const t of tours) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${escapeHtml(t.name)}</td>
+      <td><a  href="tournament.html?id=${t._id}">${escapeHtml(t.name)}</a></td>
       <td>${escapeHtml(t.status)}</td>
       <td style="text-align:right;">
         <button class="btn" data-del="${t._id}">Delete</button>
