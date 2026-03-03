@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('token');
   if (!token) {
     // redirect unauthenticated users to login
-    //window.location.href = '/login';
+    window.location.href = '/login';
     return;
   }
 
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   } catch (err) {
     console.error('Failed to fetch user data', err);
-   // window.location.href = '/login';
+    window.location.href = '/login';
   }
 
   const logoutBtn = document.getElementById('btn-logout');

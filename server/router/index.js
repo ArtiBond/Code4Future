@@ -4,6 +4,12 @@ const router = express.Router();
 const {body} = require('express-validator');
 const authMiddleware = require('../middlewares/auth-middleware');
 
+const tournamentRouter = require('./tournament-router');
+
+router.use('/tournaments', tournamentRouter);
+
+module.exports = router;
+
 // original '/registration' kept for compatibility but redirects to '/register'
 router.post('/registration',
     body('email').isEmail(),

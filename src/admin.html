@@ -4,41 +4,37 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Admin — RedXBattles</title>
-  
+
   <link rel="stylesheet" href="css/style.min.css">
   <link rel="icon" type="image/x-icon" href="img/logo.png">
 </head>
 <body>
-   <!-- NAV -->
- <div class="navbar">
+  <!-- NAV -->
+  <div class="navbar">
+    <!-- LEFT -->
+    <a class="navbar__brand" href="index.html">
+      <img src="img/logo.png" class="navbar__brand__badge" alt="logo">
+      <span>RedXBattles</span>
+    </a>
 
-  <!-- LEFT -->
-  <a class="navbar__brand" href="index.html">
-    <img src="img/logo.png" class="navbar__brand__badge" alt="logo">
-    <span>RedXBattles</span>
-  </a>
+    <!-- CENTER -->
+    <div class="navbar__links">
+      <a href="tournaments" id="btn-1">Button 1</a>
+      <a href="leaderboard" id="btn-2">Button 2</a>
+      <a href="announcements" id="btn-3">Button 3</a>
+    </div>
 
-  <!-- CENTER -->
-  <div class="navbar__links">
-    <a href="tournaments" id="btn-1">Button 1</a>
-    <a href="leaderboard" id="btn-2">Button 2</a>
-    <a href="announcements" id="btn-3">Button 3</a>
+    <!-- RIGHT -->
+    <div class="navbar__right">
+      <iframe src="_switch.html" class="header-frame" scrolling="no"></iframe>
+
+      <div class="nav__actions">
+        <a class="btn" href="login.html" id="btn-login">Login</a>
+        <a class="btn btn__primary" href="profile.html" style="border-radius: 50%; display: none;" id="btn-profile">P</a>
+      </div>
+    </div>
   </div>
 
-  <!-- RIGHT -->
-  <div class="navbar__right">
-
-    <iframe src="_switch.html" class="header-frame" scrolling="no"></iframe>
-
-    <div class="nav__actions">
-      <a class="btn" href="login.html" id="btn-login">Login</a>
-      <a class="btn btn__primary" href="profile.html" style="border-radius: 50%; display: none;" id="btn-profile">P</a>
-      
-    </div>  
-
-  </div>
-
-</div>
   <div class="container">
     <div class="h1">Адмін-панель</div>
     <div class="form__muted">Керування турнірами/тасками/журі</div>
@@ -46,46 +42,89 @@
     <div style="height:16px"></div>
 
     <div class="grid grid__2">
-      <div class="card" style="display: flex; flex-direction: column;">
+      <!-- CREATE -->
+      <div class="card" style="display:flex;flex-direction:column;">
         <b>Створити турнір</b>
         <div style="height:12px"></div>
-        <div class="form__field"><label>Назва</label><input class="form__input" placeholder="CodeBattle #2"></div>
-        <div class="form__field"><label>Опис/правила</label><textarea class="form__textarea"></textarea></div>
-        <div class="form__row">
-          <div class="form__field"><label>Reg open</label><input class="form__input" placeholder="2026-02-20 18:00"></div>
-          <div class="form__field"><label>Reg close</label><input class="form__input" placeholder="2026-02-25 18:00"></div>
+
+        <div class="form__field">
+          <label>Назва</label>
+          <input id="tour-name" class="form__input" placeholder="CodeBattle #2">
         </div>
+
+        <div class="form__field">
+          <label>Опис/правила</label>
+          <textarea id="tour-description" class="form__textarea" placeholder="Коротко про правила..."></textarea>
+        </div>
+
         <div class="form__row">
-          <div class="form__field"><label>Max teams</label><input class="form__input" type="number" placeholder="50"></div>
-          <div class="form__field"><label>Status</label>
-            <select class="form__select">
-              <option>Draft</option><option>Registration</option>
+          <div class="form__field">
+            <label>Reg open</label>
+            <input id="tour-regOpen" class="form__input" type="datetime-local">
+          </div>
+          <div class="form__field">
+            <label>Reg close</label>
+            <input id="tour-regClose" class="form__input" type="datetime-local">
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__field">
+            <label>Max teams</label>
+            <input id="tour-maxTeams" class="form__input" type="number" min="1" placeholder="50">
+          </div>
+          <div class="form__field">
+            <label>Status</label>
+            <select id="tour-status" class="form__select">
+              <option value="draft">Draft</option>
+              <option value="registration">Registration</option>
+              <option value="running">Running</option>
+            
             </select>
           </div>
         </div>
-        <div class="form__field"><label>Призначити журі</label><input class="form__input" placeholder="Попик А."></div>
-        <button class="btn btn__primary" style="margin-top: 6px;">Створити</button>
+
+        <div class="form__field">
+          <label>Призначити журі</label>
+          <input id="tour-jury" class="form__input" placeholder="Попик А., Шевченко Б.">
+          <div class="form__muted" style="margin-top:6px;">Можна через кому. (Поки що просто збережемо як текст.)</div>
+        </div>
+
+        <button id="btn-create-tour" class="btn btn__primary" style="margin-top: 6px;">Створити</button>
+        <div id="tour-form-msg" class="form__muted" style="margin-top:10px;"></div>
       </div>
 
+      <!-- LIST -->
       <div class="card">
-        <b>Турніри</b>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <b>Турніри</b>
+          <button id="btn-reload-tours" class="btn">Reload</button>
+        </div>
+
         <div style="height:12px"></div>
+
         <table class="table">
-          <thead><tr><th>Назва</th><th>Статус</th><th></th></tr></thead>
-          <tbody>
+          <thead>
             <tr>
-              <td>CodeBattle #1</td>
-              <td><span class="badge badge-warn">Running</span></td>
-              <td><button class="btn">Edit</button></td>
+              <th>Назва</th>
+              <th>Статус</th>
+              <th style="width:140px;"></th>
             </tr>
+          </thead>
+          <tbody id="tours-tbody">
+            <!-- rows injected by tours.js -->
           </tbody>
         </table>
+
+        <div id="tours-empty" class="form__muted" style="display:none;margin-top:10px;">
+          Немає жодного турніру.
+        </div>
       </div>
     </div>
   </div>
 
-
+  <script src="js/theme.js" defer></script>
+  <script src="js/userscheck.js" defer></script>
+  <script src="js/tours.js" defer></script>
 </body>
-<script src="js/theme.js" defer></script>
-<script src="js/userscheck.js" defer></script>
 </html>
