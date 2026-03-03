@@ -80,19 +80,33 @@
           <label for="email" class="form__label" data-text="EMAIL">EMAIL</label>
         </div>
 
-       <div class="form__group">
-          <select id="select" name="country" required>
-            <option value="" disabled selected>Оберіть країну</option>
-            <option>Україна</option>
-            <option>Польща</option>
-            <option>Зімбабве</option>
-          </select>
-          <label for="select" class="form__label" data-text="КРАЇНА">Країна</label>
-        </div>
+<div class="form__group countryfield">
+  <!-- реальний select для форми -->
+  <select id="countrySelect" name="country" required class="countryfield__select">
+    <option value="" disabled selected>Оберіть країну</option>
+  </select>
+
+  <!-- “фейковий” інпут як select -->
+  <div class="countryfield__combo" id="countryCombo">
+    <input
+      type="text"
+      class="countryfield__input"
+      placeholder=" " 
+      autocomplete="off"
+    />
+    <span class="countryfield__caret">▾</span>
+
+    <div class="countryfield__dropdown" hidden>
+      <ul class="countryfield__list"></ul>
+    </div>
+  </div>
+
+  <label for="countrySelect" class="form__label" data-text="КРАЇНА">Країна</label>
+</div>
 
         <div class="form__group">
-          <select id="select" name="role" required>
-            <option value="" disabled selected>Оберіть роль</option>
+          <select id="select" name="role" required class="nice-select">
+            <option value="" disabled selected> </option>
             <option>Учасник</option>
             <option>Капітан</option>
             <option>Журі</option>
@@ -131,4 +145,156 @@
 <script src="js/theme.js" defer></script>
 <script src="js/auth.js" defer></script>
 <script src="js/userscheck.js" defer></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+  const EXCLUDE = new Set(["RUS", "IRN", "USA"]);
+
+  const select = document.querySelector("#countrySelect");
+  const combo = document.querySelector("#countryCombo");
+  const input = combo.querySelector(".countryfield__input");
+  const dropdown = combo.querySelector(".countryfield__dropdown");
+  const list = combo.querySelector(".countryfield__list");
+
+  let all = [];
+
+  function getUkName(c) {
+    return c?.translations?.ukr?.common || c?.name?.common || c.cca3;
+  }
+
+  function openDropdown() { dropdown.hidden = false; }
+  function closeDropdown() { dropdown.hidden = true; }
+
+  function render(items) {
+    list.innerHTML = "";
+
+    if (!items.length) {
+      const li = document.createElement("li");
+      li.className = "countryfield__item";
+      li.textContent = "Нічого не знайдено";
+      li.style.cursor = "default";
+      list.appendChild(li);
+      return;
+    }
+
+    for (const c of items) {
+      const li = document.createElement("li");
+      li.className = "countryfield__item";
+
+      li.className = "countryfield__item";
+      li.dataset.value = c.cca3; // ОБОВʼЯЗКОВО
+
+      const img = document.createElement("img");
+      img.className = "countryfield__flag";
+      img.alt = `${c.label} flag`;
+      img.src = c.flag;
+
+      const span = document.createElement("span");
+      span.className = "countryfield__name";
+      span.textContent = c.label;
+
+      li.appendChild(img);
+      li.appendChild(span);
+
+      li.addEventListener("click", () => {
+        select.value = c.cca3;
+        input.value = c.label;
+        closeDropdown();
+        input.blur();
+      });
+
+      list.appendChild(li);
+    }
+  }
+
+  function applyFilter(q) {
+    const query = q.trim().toLowerCase();
+    const items = !query
+      ? all
+      : all.filter((c) => c.label.toLowerCase().includes(query));
+    render(items);
+  }
+
+  // load
+  try {
+    const res = await fetch("https://restcountries.com/v3.1/all?fields=name,translations,flags,cca3");
+    const data = await res.json();
+
+    all = data
+      .filter((c) => c?.cca3 && c?.flags?.png && !EXCLUDE.has(c.cca3))
+      .map((c) => ({ cca3: c.cca3, label: getUkName(c), flag: c.flags.png }))
+      .sort((a, b) => a.label.localeCompare(b.label, "uk"));
+
+    // наповнюємо select для required/submit
+    for (const c of all) {
+      const opt = document.createElement("option");
+      opt.value = c.cca3;
+      opt.textContent = c.label;
+      select.appendChild(opt);
+    }
+
+    render(all);
+  } catch (e) {
+    console.error("Countries load failed:", e);
+  }
+
+  // events
+  input.addEventListener("focus", () => {
+    openDropdown();
+    applyFilter(input.value);
+  });
+
+  input.addEventListener("click", () => {
+    openDropdown();
+    applyFilter(input.value);
+    const group = select.closest(".form__group");
+group.classList.add("countryfield--filled");
+  });
+
+  input.addEventListener("input", () => {
+  dropdown.hidden = false;
+  applyFilter(input.value);
+
+  if (!input.value.trim()) {
+    select.value = "";
+    group.classList.remove("countryfield--filled");
+  }
+});
+
+  document.addEventListener("click", (e) => {
+    if (!combo.contains(e.target)) closeDropdown();
+    const group = select.closest(".form__group"); // додай один раз зверху після select
+
+// всередині click:
+group.classList.add("countryfield--filled");
+  });
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDropdown();
+  });
+
+  
+});
+
+const group = select.closest(".form__group");
+
+// клік по елементах списку країн
+list.addEventListener("click", (e) => {
+  const item = e.target.closest(".countryfield__item");
+  if (!item) return;
+
+  const value = item.dataset.value;            // напр. "UKR"
+  const label = item.querySelector(".countryfield__name")?.textContent?.trim();
+
+  if (!value || !label) return;
+
+  select.value = value;
+  input.value = label;
+
+  group.classList.add("countryfield--filled"); // <-- оце головне
+  dropdown.hidden = true;
+  input.blur(); // щоб фокус знявся і глітч відпустив
+});
+
+
+</script>
 </html>

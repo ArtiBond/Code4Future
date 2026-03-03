@@ -1,6 +1,5 @@
 .form {
 
-
     &__row {
 
         flex-wrap:wrap;gap:10px;display:flex;margin-top:12px;align-items: flex-end;
@@ -123,7 +122,7 @@
         transition: all 0.3s ease;
 
         &[for="select"] {
-            opacity: 0;
+            opacity: 0.6;
         }
     }
 
@@ -166,7 +165,6 @@
             opacity: 0.8;
         }
 
-
         &:before, &:after {
             content: attr(data-text);
             position:absolute;
@@ -180,34 +178,19 @@
             transition: opacity 0.2s ease;
         }
 
-        &:before, &:after {
-            content: attr(data-text);
-            position:absolute;
-            top:0; left:0;
-            width:100%; height:100%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            opacity:0;
-            background-color: var(--accent);
-            transition: opacity 0.2s ease;
-        }
-
-        &:hover::before, &:hover::before {
+        &:hover::before {
             opacity:1;
             color: var(--accent2);
             animation: glitch__anim var(--g-glitch-anim-duration)
                 cubic-bezier(0.25,0.46,0.45,0.94) both;
         }
 
-        &:hover::after, &:hover::after {
+        &:hover::after {
             opacity:1;
             color: var(--accent2);
             animation: glitch__anim var(--g-glitch-anim-duration)
                 cubic-bezier(0.25,0.46,0.45,0.94) reverse both;
         }
-
-
     }
 
     &__muted {
@@ -215,7 +198,6 @@
         margin-top: 12px;
         margin-bottom: 12px;
         font-size: 13px;
-        color: rgba(229,229,229,0.65);
         color:var(--muted);
 
         a {
@@ -237,11 +219,11 @@
 
     &__select, &__input, &__textarea {
         width:100%;
-  padding:10px 12px;
-  border-radius:6px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
+        padding:10px 12px;
+        border-radius:6px;
+        border:1px solid var(--border);
+        background:var(--bg);
+        color:var(--text);
     }
 
     &__textarea {
@@ -250,9 +232,156 @@
     }
 
     &__input[type="number"]::-webkit-outer-spin-button,
-&__input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    &__input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 }
+
+
+/* ===== ДОДАНО ТІЛЬКИ ДЛЯ СПИСКУ КРАЇН ===== */
+
+.countryfield__select {
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.countryfield__combo {
+    position:relative;
+    width:100%;
+}
+
+.countryfield__input {
+    width:100%;
+    background:transparent;
+    border:none;
+    border-bottom:2px solid var(--accent2);
+    padding:0.75em 1.6em 0.75em 0;
+    font-size:1rem;
+    color:var(--text);
+    font-family:inherit;
+    outline:none;
+    cursor:pointer;
+}
+
+.countryfield__caret {
+    position:absolute;
+    right:0;
+    top:0.75em;
+    color:rgba(229,229,229,.7);
+    pointer-events:none;
+}
+
+.countryfield__dropdown {
+    position:absolute;
+    left:0;
+    right:0;
+    top:calc(100% + 8px);
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+    max-height:260px;
+    overflow-y:auto;
+    z-index:1000;
+
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+}
+
+.countryfield__dropdown::-webkit-scrollbar {
+    display:none;
+}
+
+.countryfield__list {
+    list-style:none;
+    margin:0;
+    padding:6px;
+}
+
+.countryfield__item {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.countryfield__item:hover {
+    background:var(--muted1);
+}
+
+.countryfield__flag {
+    width:22px;
+    height:16px;
+    object-fit:cover;
+    border-radius:3px;
+}
+
+/* ===== FIX glitch для кастомного списку країн ===== */
+
+.form__group.countryfield:focus-within .form__label {
+  top: -1.2em;
+  font-size: 0.8rem;
+  opacity: 1;
+}
+
+.form__group.countryfield:focus-within .form__label::after,
+.form__group.countryfield:focus-within .form__label::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: var(--bg);
+}
+
+.form__group.countryfield:focus-within .form__label::before {
+  color: var(--accent2);
+  animation: glitch__anim var(--g-glitch-anim-duration)
+    cubic-bezier(0.25,0.46,0.45,0.94) both;
+}
+
+.form__group.countryfield:focus-within .form__label::after {
+  color: var(--accent);
+  animation: glitch__anim var(--g-glitch-anim-duration)
+    cubic-bezier(0.25,0.46,0.45,0.94) reverse both;
+}
+
+
+
+/* дефолт: оверлеї вимкнені, щоб текст був нормальний */
+.form__group.countryfield .form__label::before,
+.form__group.countryfield .form__label::after {
+  content: none;
+}
+
+/* ВКЛ: коли фокус всередині */
+.form__group.countryfield:focus-within .form__label::before,
+.form__group.countryfield:focus-within .form__label::after,
+/* ВКЛ: коли ми спеціально програємо “blur glitch” */
+.form__group.countryfield.countryfield--blurglitch .form__label::before,
+.form__group.countryfield.countryfield--blurglitch .form__label::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: var(--bg);
+}
+
+/* твій глітч (на focus і на blur) */
+.form__group.countryfield:focus-within .form__label::before,
+.form__group.countryfield.countryfield--blurglitch .form__label::before {
+  color: var(--accent2);
+  animation: glitch__anim var(--g-glitch-anim-duration)
+    cubic-bezier(0.25,0.46,0.45,0.94) both;
+}
+
+.form__group.countryfield:focus-within .form__label::after,
+.form__group.countryfield.countryfield--blurglitch .form__label::after {
+  color: var(--accent);
+  animation: glitch__anim var(--g-glitch-anim-duration)
+    cubic-bezier(0.25,0.46,0.45,0.94) reverse both;
 }
 

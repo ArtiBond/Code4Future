@@ -1,0 +1,151 @@
+.form {
+  // використай ту саму анімацію (копія твоєї)
+  @keyframes glitch__anim{
+    0%{ transform:translate(0); clip-path: inset(0 0 0 0); }
+    20%{ transform:translate(-5px,3px); clip-path: inset(50% 0 20% 0); }
+    40%{ transform:translate(3px,-2px); clip-path: inset(20% 0 60% 0); }
+    60%{ transform:translate(-4px,2px); clip-path: inset(80% 0 5% 0); }
+    80%{ transform:translate(4px,-3px); clip-path: inset(30% 0 45% 0); }
+    100%{ transform:translate(0); clip-path: inset(0 0 0 0); }
+  }
+
+  .countryfield {
+    // ховаємо select, але він лишається required і для submit
+    &__select {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      width: 0;
+    }
+
+    &__combo {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    // робимо вигляд як у твого select/input
+    &__input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid var(--accent2);
+      padding: 0.75em 1.6em 0.75em 0; // місце під caret справа
+      font-size: 1rem;
+      color: var(--text);
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease;
+      cursor: pointer; // як select
+    }
+
+    &__caret {
+      position: absolute;
+      right: 0;
+      bottom: 0.85em;
+      color: rgba(229,229,229,.7);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    // focus як у тебе
+    &__input:focus {
+      border-color: var(--accent);
+    }
+
+    // Лейбл піднімаємо як у тебе
+    // (в тебе form__label стоїть після поля, тож тут працює +)
+    &__input:focus + .countryfield__caret + .countryfield__dropdown + .form__label,
+    &__input:not(:placeholder-shown) + .countryfield__caret + .countryfield__dropdown + .form__label {
+      top: -1.2em;
+      font-size: 0.8rem;
+      opacity: 1;
+    }
+
+    // Глітч на label при focus (як у тебе)
+    &__input:focus ~ .form__label::after,
+    &__input:focus ~ .form__label::before {
+      content: attr(data-text);
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background-color: var(--bg);
+    }
+
+    &__input:focus ~ .form__label::before {
+      color: var(--accent2);
+      animation: glitch__anim var(--g-glitch-anim-duration)
+        cubic-bezier(0.25,0.46,0.45,0.94) both;
+    }
+
+    &__input:focus ~ .form__label::after {
+      color: var(--accent);
+      animation: glitch__anim var(--g-glitch-anim-duration)
+        cubic-bezier(0.25,0.46,0.45,0.94) reverse both;
+    }
+
+    // dropdown стилі
+    &__dropdown {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 8px);
+      background: var(--bg);
+      border: 1px solid var(--border, rgba(229,229,229,.2));
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      z-index: 999;
+      overflow-y: auto;
+      max-height: 260px;
+
+      // ховаємо повзунок, але скрол лишається
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* old Edge */
+      &::-webkit-scrollbar { display: none; }
+
+      // легка поява як “менюшка”
+      transform-origin: top;
+      animation: countryDropIn .12s ease-out;
+    }
+
+    @keyframes countryDropIn {
+      from { opacity: 0; transform: translateY(-6px) scaleY(.98); }
+      to   { opacity: 1; transform: translateY(0) scaleY(1); }
+    }
+
+    &__list {
+      list-style: none;
+      margin: 0;
+      padding: 6px;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--text);
+
+      &:hover {
+        background: var(--muted1);
+      }
+    }
+
+    &__flag {
+      width: 22px;
+      height: 16px;
+      object-fit: cover;
+      border-radius: 3px;
+      flex: 0 0 auto;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
+    }
+
+    &__name {
+      flex: 1 1 auto;
+    }
+  }
+}
