@@ -2,7 +2,7 @@ const path = require('path');
 const userService = require('../service/user-service');
 const {validationResult} = require('express-validator');
 const ApiError = require('../exceptions/api-error');
-
+const tokenService = require('../service/token-service');
 class UserController {
     async registration(req, res, next) {
         try {
@@ -43,16 +43,47 @@ class UserController {
         }
     }
 
-    async refresh(req, res, next) {
-        try {
-            const {refreshToken} = req.cookies;
-            const userData = await userService.refresh(refreshToken);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
-            return res.json(userData);
-        } catch (e) {
-            next(e);
-        }
+   async refresh(req, res) {
+  try {
+    console.log('cookies:', req.cookies);
+    const refreshToken = req.cookies?.refreshToken;
+    console.log('refreshToken len:', refreshToken?.length);
+
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    console.log('userData:', userData);
+
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+    console.log('tokenFromDb:', tokenFromDb);
+
+    if (!userData || !tokenFromDb) {
+      return res.status(401).json({ message: 'Unauthorized' });
     }
+
+    const tokens = tokenService.generateTokens({
+      id: userData.id,
+      email: userData.email,
+      role: userData.role
+    });
+    console.log('generated tokens ok');
+
+    await tokenService.saveToken(userData.id, tokens.refreshToken);
+    console.log('saved token ok');
+
+    res.cookie('refreshToken', tokens.refreshToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: false,
+      path: '/refresh',
+      maxAge: 30 * 24 * 60 * 60 * 1000
+    });
+
+    return res.json({ accessToken: tokens.accessToken });
+  } catch (e) {
+    console.error('REFRESH ERROR:', e);
+    return res.status(500).json({ message: 'Refresh error' });
+  }
+}
+
 
 
     async homePage(req, res, next) {
@@ -98,6 +129,7 @@ class UserController {
     async announcementsPage(req, res, next) {
         res.sendFile(path.join(__dirname, "../../src", "announcements.html"));
     }
+    
 }
 
 module.exports = new UserController();

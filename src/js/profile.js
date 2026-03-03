@@ -2,34 +2,53 @@ document.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('token');
   if (!token) {
     // redirect unauthenticated users to login
-    window.location.href = '/login';
+    //window.location.href = '/login';
     return;
   }
 
   try {
-    const res = await fetch('/me', {
-      headers: {
-        Authorization: 'Bearer ' + token
-      }
+    const res = await authFetch('/me', {
+      credentials: 'include'
     });
     if (!res.ok) {
-      // token may have expired or be invalid
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
-      return;
-    }
+ 
+  if (res.status === 401 || res.status === 403) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  } else {
+   
+    console.warn('Request failed but token kept. Status:', res.status);
+  }
+  return;
+}
+
     const user = await res.json();
     // populate fields
     const nameEl = document.getElementById('profile-name');
     const emailEl = document.getElementById('profile-email');
     const roleEl = document.getElementById('profile-role');
-
+   
+    
     if (nameEl) nameEl.value = user.name || '';
     if (emailEl) emailEl.value = user.email || '';
     if (roleEl) roleEl.textContent = user.role || '';
+    
+    if (user.role === 'Адміністратор') {
+      document.getElementById('jury-block').style.display = 'none';
+       document.getElementById('player-block').style.display = 'none';
+        document.getElementById('team-block').style.display = 'none';
+    }
+     if (user.role === 'Журі') {
+      document.getElementById('admin-block').style.display = 'none';
+       document.getElementById('player-block').style.display = 'none';
+       document.getElementById('team-block').style.display = 'none';
+    }
+     if (user.role === 'Учасник') {
+      document.getElementById('admin-block').style.display = 'none';
+       document.getElementById('jury-block').style.display = 'none';
+    }
   } catch (err) {
     console.error('Failed to fetch user data', err);
-    window.location.href = '/login';
+   // window.location.href = '/login';
   }
 });

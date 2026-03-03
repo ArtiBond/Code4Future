@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         const res = await fetch('/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  credentials: 'include',
+  body: JSON.stringify(data)
+});
+        
         if (!res.ok) {
           const text = await res.text();
           alert('Login failed: ' + text);
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const res = await fetch('/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify(data)
         });
         if (!res.ok) {
@@ -84,4 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  
+
 });

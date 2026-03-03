@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Профіль — RedXBattles</title>
 <link rel="stylesheet" href="css/style.min.css">
-
+<link rel="icon" type="image/x-icon" href="img/logo.png">
 </head>
 <body>
 
@@ -31,7 +31,8 @@
     <iframe src="_switch.html" class="header-frame" scrolling="no"></iframe>
 
     <div class="nav__actions">
-      <a class="btn" href="login.html">Login/profile</a>
+      <a class="btn" href="login.html" id="btn-login">Login</a>
+      <a class="btn btn__primary" href="profile.html" style="border-radius: 50%; display: none;" id="btn-profile">P</a>
       
     </div>  
 
@@ -41,7 +42,7 @@
 <div class="container">
 
   <div class="h1">Профіль користувача</div>
-  <div class="form__muted">Роль: <span id="profile-role" class="badge badge-accent">Captain</span></div>
+  <div class="form__muted">Роль: <span id="profile-role" class="badge badge__accent">Role</span></div>
 
   <div style="height:20px"></div>
 
@@ -66,7 +67,7 @@
   <div style="height:16px"></div>
 
   <!-- TEAM BLOCK -->
-  <div class="card">
+  <div class="card" id="team-block">
     <b>Моя команда</b>
     <div style="height:12px"></div>
 
@@ -106,7 +107,7 @@
   <div style="height:16px"></div>
 
    <!-- Players BLOCK -->
-  <div class="card">
+  <div class="card" id="player-block">
     <b>Мої турніри</b>
     <div style="height:12px"></div>
 
@@ -130,8 +131,8 @@
 
   <div style="height:16px"></div>
   <!-- JURY BLOCK -->
-  <div class="card">
-    <b>Оцінені роботи (Jury)</b>
+  <div class="card" id ="jury-block">
+    <b>Роботи до оцінювання</b>
     <div style="height:12px"></div>
 
     <table class="table">
@@ -155,8 +156,8 @@
   <div style="height:16px"></div>
 
   <!-- ADMIN BLOCK -->
-  <div class="card">
-    <b>Створені турніри (Admin)</b>
+  <div class="card" id="admin-block">
+    <b>Ваші турніри</b>
     <div style="height:12px"></div>
 
     <table class="table">
@@ -183,4 +184,6 @@
 <script src="js/theme.js" defer></script>
 <script src="js/auth.js" defer></script>
 <script src="js/profile.js" defer></script>
+<script src="js/userscheck.js" defer></script>
+<script src="js/authFetch.js" defer></script>
 </html>

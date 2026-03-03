@@ -20,7 +20,7 @@ router.post('/register',
 
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
-router.get('/refresh', userController.refresh);
+router.post('/refresh', userController.refresh);
 
 // user info
 router.get('/me', authMiddleware, userController.getMe);
