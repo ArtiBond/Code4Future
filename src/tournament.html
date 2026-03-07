@@ -42,7 +42,11 @@
     <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
       <div>
         <div class="h1" id="nameTOUR">CodeBattle #1</div>
-        <div class="form__muted">Статус: <span class="badge badge__warn">Running</span></div>
+<div class="form__muted">
+  Статус:
+  <span class="badge badge__warn" id="tourStatus">Running</span>
+</div>
+
       </div>
       <a class="btn" href="leaderboard.html">Leaderboard</a>
     </div>
@@ -52,15 +56,16 @@
     <div class="grid grid__2">
       <div class="card">
         <b>Правила / опис</b>
-        <div class="form__muted" style="margin-top:8px;">
-          Тут текст правил, формату, дедлайнів...
-        </div>
+        <div class="form__muted" style="margin-top:8px;" id="tourDescription">
+  Тут текст правил, формату, дедлайнів...
+</div>
       </div>
 
       <div class="card">
         <b>Ваш стан</b>
-        <div class="form__muted" style="margin-top:8px;">Команда: <b>MyTeam</b></div>
-        <div class="form__muted">Сабміт: <span class="badge badge__accent">Не подано</span></div>
+        <div class="form__muted" style="margin-top:8px;">Команда: <b id="teamName">MyTeam</b></div>
+<div class="form__muted">Сабміт: <span class="badge badge__accent" id="submitStatus">Не подано</span></div>
+
         <div class="form__row">
           <a class="btn btn__primary" href="submission.html">Подати рішення</a>
         </div>
@@ -69,21 +74,22 @@
 
     <div class="card" style="margin-top:16px;">
       <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
-        <b>Активне завдання: Round 1 — API Platform</b>
-        <span class="badge badge__warn">Active</span>
+        <b id="activeTaskTitle">Активне завдання: Round 1 — API Platform</b>
+<span class="badge badge__warn" id="taskStatus">Active</span>
+
       </div>
-      <div class="form__muted" style="margin-top:8px;">
-        Дедлайн: 2026-03-01 20:00 (таймер можна додати потім)
-      </div>
+      <div class="form__muted" style="margin-top:8px;" id="taskDeadline">
+  Дедлайн: -
+</div>
 
       <div style="margin-top:12px;">
-        <b>Must have</b>
-        <ul class="form__muted">
-          <li>Auth (Admin/Team/Jury)</li>
-          <li>Турніри + реєстрація</li>
-          <li>Сабміти + оцінювання</li>
-        </ul>
-      </div>
+  <b>Must have</b>
+  <ul class="form__muted" id="mustHaveList">
+    <li>Auth (Admin/Team/Jury)</li>
+    <li>Турніри + реєстрація</li>
+    <li>Сабміти + оцінювання</li>
+  </ul>
+</div>
 
       <div class="form__row" style="margin-top:12px;display:flex;gap:10px;">
         <a class="btn" href="task.html">Деталі завдання</a>
@@ -96,46 +102,9 @@
 </body>
 <script src="js/theme.js" defer></script>
 <script src="js/userscheck.js" defer></script>
-<!--<script src="js/tour.js" defer></script> -->
+<script src="js/tour.js" defer></script>
 
 <script>
-async function loadTournament() {
-  const id = new URLSearchParams(location.search).get("id");
-  if (!id) {
-    document.body.innerHTML = "<h2>Missing id</h2>";
-    return;
-  }
-
-  const res = await fetch("http://localhost:5000/tournaments");
-  if (!res.ok) throw new Error("Failed to load tournaments");
-
-  const list = await res.json(); // очікуємо масив
-
-  // ВАЖЛИВО: що саме у тебе є “id” в об’єкті?
-  // може бути: item._id, item.id, item.tournamentId
-  const t = list.find(item =>
-    String(item._id ?? item.id ?? item.tournamentId ?? id) === String(id)
-  );
-
-  if (!t) {
-    document.body.innerHTML = "<h2>Tournament not found</h2>";
-    return;
-  }
-
-  // приклад рендеру
-  document.getElementById("name").textContent = t.name || "Unnamed";
-  document.getElementById("description").textContent = JSON.stringify(t, null, 2);
-}
-
-document.getElementById("nameTOUR") = t.name;
-
-document.addEventListener("DOMContentLoaded", () => {
-  loadTournament().catch(err => {
-    document.body.innerHTML = `<h2>Error</h2><pre>${err.message}</pre>`;
-  });
-});
+ 
 </script>
-
-<h1 id="title">Loading…</h1>
-<pre id="raw"></pre>
 </html>

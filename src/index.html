@@ -128,113 +128,62 @@
     <div class="grid grid__2">
 
       <!-- Registration -->
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
-          <div>
-            <b style="font-size:16px;">Майбутні турніри</b>
-            <div class="form__muted" style="margin-top:6px;font-size:13px;">Відкрита реєстрація або скоро старт</div>
-          </div>
-          <span class="badge badge__warn">Registration open</span>
-        </div>
+     <div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+    <div>
+      <b style="font-size:16px;">Майбутні турніри</b>
+      <div class="form__muted" style="margin-top:6px;font-size:13px;">Відкрита реєстрація або скоро старт</div>
+    </div>
+    <span class="badge badge__warn">Registration open</span>
+  </div>
 
-        <div style="height:12px;"></div>
+  <div style="height:12px;"></div>
 
-        <div class="card" style="margin:0;">
-          <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">
-            <b>CodeBattle #2</b>
-            <span class="badge badge__warn">Registration</span>
-          </div>
-          <div class="form__muted" style="margin-top:8px;font-size:13px;">
-            Реєстрація: 20.02.2026 — 25.02.2026
-          </div>
-          <div class="form__row" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-            <a class="btn btn__primary" href="team-register">Реєстрація команди</a>
-            <a class="btn" href="tournament">Деталі</a>
-          </div>
-        </div>
-
-      </div>
+  <div id="registrationList"></div>
+</div>
 
       <!-- Running -->
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
-          <div>
-            <b style="font-size:16px;">Активні турніри</b>
-            <div class="form__muted" style="margin-top:6px;font-size:13px;">Турніри, де зараз тривають раунди</div>
-          </div>
-          <span class="badge badge__accent">Running</span>
-        </div>
-
-        <div style="height:12px;"></div>
-
-        <div class="card" style="margin:0;">
-          <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">
-            <b>CodeBattle #1</b>
-            <span class="badge badge__accent">Running</span>
-          </div>
-          <div class="form__muted" style="margin-top:8px;font-size:13px;">
-            Активне завдання: Round 1 • дедлайн 01.03.2026
-          </div>
-          <div class="form__row" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-            <a class="btn" href="tournament">Перейти</a>
-            <a class="btn" href="leaderboard">Leaderboard</a>
-          </div>
-        </div>
-
-      </div>
+     <div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+    <div>
+      <b style="font-size:16px;">Активні турніри</b>
+      <div class="form__muted" style="margin-top:6px;font-size:13px;">Турніри, де зараз тривають раунди</div>
     </div>
+    <span class="badge badge__accent">Running</span>
+  </div>
+
+  <div style="height:12px;"></div>
+
+  <div id="runningList"></div>
+</div>
 
     <!-- Finished -->
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
-        <div>
-          <b style="font-size:16px;">Завершені турніри</b>
-          <div class="form__muted" style="margin-top:6px;font-size:13px;">Архів + результати</div>
-        </div>
-        <span class="badge badge__ok">Finished</span>
-      </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Турнір</th>
-            <th>Рік</th>
-            <th>Статус</th>
-            <th style="width:220px;">Дії</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>CodeBattle #0</td>
-            <td>2025</td>
-            <td><span class="badge badge__ok">Finished</span></td>
-            <td>
-              <div class="form__row" style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn" href="tournament">Відкрити</a>
-                <a class="btn" href="leaderboard">Рейтинг</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>CodeBattle Summer</td>
-            <td>2025</td>
-            <td><span class="badge badge__ok">Finished</span></td>
-            <td>
-              <div class="form__row" style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a class="btn" href="tournament">Відкрити</a>
-                <a class="btn" href="leaderboard">Рейтинг</a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+    <div>
+      <b style="font-size:16px;">Завершені турніри</b>
+      <div class="form__muted" style="margin-top:6px;font-size:13px;">Архів + результати</div>
     </div>
-
+    <span class="badge badge__ok">Finished</span>
   </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Турнір</th>
+        <th>Рік</th>
+        <th>Статус</th>
+        <th style="width:220px;">Дії</th>
+      </tr>
+    </thead>
+    <tbody id="finishedList"></tbody>
+  </table>
+</div>
 
 
 
 </body>
 <script src="js/theme.js" defer></script>
 <script src="js/userscheck.js" defer></script>
+<script src="js/home.js" defer></script>
 </html>

@@ -12,7 +12,7 @@ const TournamentSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["draft", "registration", "running"],
+      enum: ["draft", "registration", "running", "finished"],
       default: "draft",
     },
 
