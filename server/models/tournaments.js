@@ -16,6 +16,9 @@ const TournamentSchema = new mongoose.Schema(
       default: "draft",
     },
 
+    startTournament: { type: Date, default: null },
+    endTournament: { type: Date, default: null },
+
     jury: { type: String, default: "" }, // поки просто текст
   },
   { timestamps: true }

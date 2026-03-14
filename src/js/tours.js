@@ -117,6 +117,12 @@ async function createTournament() {
       : null,
     maxTeams: Number(el("tour-maxTeams")?.value || 50),
     status: (el("tour-status")?.value || "draft").toLowerCase(),
+    startTournament: el("tour-startTournament")?.value
+      ? new Date(el("tour-startTournament").value).toISOString()
+      : null,
+    endTournament: el("tour-endTournament")?.value
+      ? new Date(el("tour-endTournament").value).toISOString()
+      : null,
     jury: el("tour-jury")?.value.trim() || "",
   };
 
