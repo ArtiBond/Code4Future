@@ -1,6 +1,6 @@
 const ss = require('node:dns/promises')
 ss.setServers(["1.1.1.1", "8.8.8.8"]);
-require('dotenv').config()
+require('dotenv').config({ override: true });
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser')

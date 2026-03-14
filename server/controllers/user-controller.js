@@ -13,7 +13,7 @@ class UserController {
             const {nickname, email, password, country, role} = req.body;
             const name = nickname || req.body.name;
             const userData = await userService.registration(name, email, password, country, role);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            res.cookie('refreshToken', userData.refreshToken);
             return res.json(userData);
         } catch (e) {
             next(e);
@@ -24,7 +24,8 @@ class UserController {
         try {
             const {email, password} = req.body;
             const userData = await userService.login(email, password);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            res.cookie('refreshToken', userData.refreshToken);
+            console.log('cookies:', req.cookies);
             console.log(userData);
             return res.json(userData);
         } catch (e) {
@@ -55,13 +56,20 @@ class UserController {
     const tokenFromDb = await tokenService.findToken(refreshToken);
     console.log('tokenFromDb:', tokenFromDb);
 
-    if (!userData || !tokenFromDb) {
+    if (!userData) {
       return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+
+    if (!tokenFromDb) {
+      console.warn('Refresh token not found in DB; issuing new token anyway (stale cookie?)');
     }
 
     const tokens = tokenService.generateTokens({
       id: userData.id,
       email: userData.email,
+      name: userData.name,
+      country: userData.country,
       role: userData.role
     });
     console.log('generated tokens ok');
@@ -69,13 +77,7 @@ class UserController {
     await tokenService.saveToken(userData.id, tokens.refreshToken);
     console.log('saved token ok');
 
-    res.cookie('refreshToken', tokens.refreshToken, {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: false,
-      path: '/refresh',
-      maxAge: 30 * 24 * 60 * 60 * 1000
-    });
+    res.cookie('refreshToken', tokens.refreshToken);
 
     return res.json({ accessToken: tokens.accessToken });
   } catch (e) {
