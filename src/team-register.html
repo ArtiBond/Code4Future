@@ -1,151 +1,190 @@
 <!doctype html>
 <html lang="uk">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Реєстрація команди — RedXBattles</title>
-<link rel="stylesheet" href="css/style.min.css">
-<link rel="icon" type="image/x-icon" href="img/logo.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Реєстрація команди — RedXBattles</title>
+  <link rel="stylesheet" href="css/style.min.css">
+  <link rel="icon" type="image/x-icon" href="img/logo.png">
 </head>
 <body>
 
-   <!-- NAV -->
- <div class="navbar">
+  <!-- NAV -->
+  <div class="navbar">
 
-  <!-- LEFT -->
-  <a class="navbar__brand" href="/">
-    <img src="img/logo.png" class="navbar__brand__badge" alt="logo">
-    <span>RedXBattles</span>
-  </a>
+    <!-- LEFT -->
+    <a class="navbar__brand" href="/">
+      <img src="img/logo.png" class="navbar__brand__badge" alt="logo">
+      <span>RedXBattles</span>
+    </a>
 
-  <!-- CENTER -->
-  <div class="navbar__links">
-    <a href="tournaments" id="btn-1">Button 1</a>
-    <a href="leaderboard" id="btn-2">Button 2</a>
-    <a href="announcements" id="btn-3">Button 3</a>
+    <!-- CENTER -->
+    <div class="navbar__links">
+      <a href="tournaments" id="btn-1">Button 1</a>
+      <a href="leaderboard" id="btn-2">Button 2</a>
+      <a href="announcements" id="btn-3">Button 3</a>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="navbar__right">
+      <iframe src="_switch.html" class="header-frame" scrolling="no"></iframe>
+
+      <div class="nav__actions">
+        <a class="btn" href="login" id="btn-login">Login</a>
+        <a class="btn btn__primary" href="profile" style="border-radius: 50%; display: none;" id="btn-profile">P</a>
+      </div>
+    </div>
+
   </div>
 
-  <!-- RIGHT -->
-  <div class="navbar__right">
+  <div class="container" style="max-width: 820px;">
+    <div class="h1" id="tournament-title">Турнір</div>
+    <div class="form__muted">Реєстрація команди</div>
 
-    <iframe src="_switch.html" class="header-frame" scrolling="no"></iframe>
+    <div style="height:16px"></div>
 
-    <div class="nav__actions">
-      <a class="btn" href="login" id="btn-login">Login</a>
-      <a class="btn btn__primary" href="profile" style="border-radius: 50%; display: none;" id="btn-profile">P</a>
-      
-    </div>  
+    <!-- MY TEAM BLOCK -->
+    <div id="my-team-card" class="card" style="display:none; margin-bottom:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div>
+          <b>Ваша команда</b>
+          <div id="my-team-info" class="form__muted" style="margin-top:6px;"></div>
+        </div>
 
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button id="btn-edit-team" type="button" class="btn">Редагувати</button>
+          <button id="btn-delete-team" type="button" class="btn">Видалити</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM FORM -->
+    <div id="team-form-card" class="card" style="max-width:800px;">
+
+      <div class="form__field">
+        <label for="team-name">Назва команди</label>
+        <input id="team-name" class="form__input" placeholder="Team Avengers">
+      </div>
+
+      <div style="height:12px"></div>
+
+      <b>Капітан</b>
+      <div class="grid__row" style="margin-top:8px;">
+        <div class="form__field">
+          <label for="captain-fullName">ПІБ</label>
+          <input id="captain-fullName" class="form__input" placeholder="Іван Іваненко">
+        </div>
+
+        <div class="form__field">
+          <label for="captain-email">Email</label>
+          <input id="captain-email" class="form__input" type="email" placeholder="captain@email.com">
+        </div>
+
+        <div class="form__field">
+          <label for="captain-telegram">Telegram</label>
+          <input id="captain-telegram" class="form__input" placeholder="@artBond_13">
+        </div>
+
+        <div class="form__field">
+          <label for="captain-school">Школа</label>
+          <input id="captain-school" class="form__input" placeholder="Школа №123">
+        </div>
+
+        <div class="form__field">
+          <label for="captain-className">Клас</label>
+          <input id="captain-className" class="form__input" placeholder="10">
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <b>Учасники</b>
+        <button id="btn-add-member" type="button" class="btn">+ Додати учасника</button>
+      </div>
+
+      <div id="members-wrap" style="margin-top:10px;">
+        <!-- dynamic members here -->
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="grid__row">
+        <div class="form__field">
+          <label for="city">Місто</label>
+          <input id="city" class="form__input" placeholder="Київ">
+        </div>
+
+        <div class="form__field">
+          <label for="country">Країна</label>
+          <input id="country" class="form__input" placeholder="Україна">
+        </div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <button id="btn-save-team" type="button" class="btn btn__primary">Зареєструвати команду</button>
+      <div id="team-form-msg" class="form__muted" style="margin-top:10px;"></div>
+    </div>
   </div>
 
-</div>
+  <!-- OPTIONAL TEMPLATE FOR JS -->
+  <template id="member-template">
+    <div class="grid__row member-row" style="margin-top:10px;">
+      <div class="form__field">
+        <label>ПІБ</label>
+        <input class="form__input member-fullName" placeholder="Учасник">
+      </div>
 
-<div class="container" style="max-width: 820px;">
-  <div class="h1">Турнір: GayTournament #1</div>
-  <div class="form__muted">Реєстрація команди</div>
+      <div class="form__field">
+        <label>Email</label>
+        <input class="form__input member-email" type="email" placeholder="member@email.com">
+      </div>
 
+      <div class="form__field">
+        <label>Школа</label>
+        <input class="form__input member-school" placeholder="Школа №123">
+      </div>
+
+      <div class="form__field">
+        <label>Клас</label>
+        <input class="form__input member-className" placeholder="10">
+      </div>
+
+      <div class="form__field" style="display:flex;align-items:flex-end;">
+        <button type="button" class="btn btn-remove-member">Видалити</button>
+      </div>
+    </div>
+  </template>
   <div style="height:16px"></div>
 
-  <div class="card" style="max-width:800px;">
-    
-    <div class="container__field">
-      <label>Назва команди</label>
-      <input class="form__input" placeholder="Team Avengers">
-    </div>
+<div class="card">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+    <b>Команди турніру</b>
+    <button id="btn-reload-teams" class="btn" type="button" onclick="location.reload()">Reload</button>
+  </div>
 
-    <div style="height:12px"></div>
+  <div style="height:12px"></div>
 
-    <b>Капітан</b>
-    <div class="grid__row" style="margin-top:8px;">
-      <div class="form__field">
-        <label>ПІБ</label>
-        <input class="form__input" placeholder="Іван Іваненко">
-      </div>
-      <div class="form__field">
-        <label>Email</label>
-        <input class="form__input" placeholder="captain@email.com">
-      </div>
-      <div class="form__field">
-        <label>Telegram</label>
-        <input class="form__input" placeholder="@artBond_13">
-      </div>
-      <div class="form__field">
-        <label>Школа</label>
-        <input class="form__input" placeholder="Школа №123">
-      </div>
-       <div class="form__field">
-        <label>Клас</label>
-        <input class="form__input" placeholder="10">
-      </div>
-    </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Назва</th>
+        <th>Учасників</th>
+        <th style="width:180px;"></th>
+      </tr>
+    </thead>
+    <tbody id="teams-tbody"></tbody>
+  </table>
 
-    <div style="height:12px"></div>
-
-    <b>Учасники</b>
-
-    <div class="grid__row" style="margin-top:8px;">
-      <div class="form__field">
-        <label>ПІБ</label>
-        <input class="form__input" placeholder="Учасник 1">
-      </div>
-      <div class="form__field">
-        <label>Email</label>
-        <input class="form__input" placeholder="member1@email.com">
-      </div>
-      <div class="form__field">
-        <label>Школа</label>
-        <input class="form__input" placeholder="Школа №123">
-      </div>
-      <div class="form__field">
-        <label>Клас</label>
-        <input class="form__input" placeholder="10">
-      </div>
-    </div>
-
-    <div class="grid__row">
-      <div class="form__field">
-        <label>ПІБ</label>
-        <input class="form__input" placeholder="Учасник 2">
-      </div>
-      <div class="form__field">
-        <label>Email</label>
-        <input class="form__input" placeholder="member2@email.com">
-      </div>
-      <div class="form__field">
-        <label>Школа</label>
-        <input class="form__input" placeholder="Школа №123">
-      </div>
-      <div class="form__field">
-        <label>Клас</label>
-        <input class="form__input" placeholder="10">
-      </div>
-    </div>
-
-    <button class="btn" style="margin-top:10px;">+ Додати учасника</button>
-
-    <div style="height:16px"></div>
-
-    <div class="grid__row">
-      <div class="form__field">
-        <label>Місто</label>
-        <input class="form__input" placeholder="Київ">
-      </div>
-      <div class="form__field">
-        <label>Країна</label>
-        <input class="form__input" placeholder="Зімбабве">
-      </div>
-      
-    </div>
-
-    <div style="height:16px"></div>
-
-    <button class="btn btn__primary">Зареєструвати команду</button>
-
+  <div id="teams-empty" class="form__muted" style="display:none;margin-top:10px;">
+    Немає жодної команди.
   </div>
 </div>
 
 
+  <script src="js/theme.js" defer></script>
+  <script src="js/userscheck.js" defer></script>
+  <script src="js/team-register.js" defer></script>
 </body>
-<script src="js/theme.js" defer></script>
-<script src="js/userscheck.js" defer></script>
 </html>

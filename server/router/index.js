@@ -5,9 +5,10 @@ const {body} = require('express-validator');
 const authMiddleware = require('../middlewares/auth-middleware');
 
 const tournamentRouter = require('./tournament-router');
+const teamRouter = require('./team-router');
 
 router.use('/tournaments', tournamentRouter);
-
+router.use('/teams', teamRouter);
 
 module.exports = router;
 
