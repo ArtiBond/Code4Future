@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.warn('Request failed but token kept. Status:', res.status);
   }
   return;
-}
+
+    }
 
     const user = await res.json();
     // populate fields
@@ -82,18 +83,29 @@ if (logoutBtn) {
   });
 }
 
-async function getFlag(countryName) {
-  const res = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
-  const data = await res.json();
+async function loadFlag(countryCode) {
+  try {
+    const code = String(countryCode).trim().toUpperCase();
+    const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
+    if (!res.ok) throw new Error(`Не знайшов країну: ${code}`);
 
-  const flag = document.getElementById('flag');
-  const flagUrl = data[0].flags.svg;
- flag.style.backgroundImage = url(flagUrl);
- flag.style.backgroundSize = "cover";
- flag.style.backgroundPosition = "center";
+    const [country] = await res.json();
+    const flag = document.getElementById("flag");
 
-  return flagUrl;
+    flag.style.display = "inline-block";
+    flag.style.width = "40px";
+    flag.style.height = "40px";
+    flag.style.borderRadius = "50%";
+    flag.style.backgroundImage = `url("${country.flags.svg}")`;
+    flag.style.backgroundSize = "cover";
+    flag.style.backgroundPosition = "center";
+    flag.style.backgroundRepeat = "no-repeat";
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-getFlag('Ukraine');
-});
+loadFlag(user.country);
+
+
+}); 
