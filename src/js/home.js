@@ -1,19 +1,20 @@
-document.addEventListener("DOMContentLoaded", loadHomeTournaments);
+let allTournaments = [];
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadHomeTournaments();
+  setupFilters();
+});
 
 async function loadHomeTournaments() {
   try {
     const res = await fetch("/tournaments");
     if (!res.ok) throw new Error("Не вдалося завантажити турніри");
 
-    const tournaments = await res.json();
+    allTournaments = await res.json();
 
-    const registration = tournaments.filter(t => t.status === "registration");
-    const running = tournaments.filter(t => t.status === "running");
-    const finished = tournaments.filter(t => t.status === "finished");
-
-    renderRegistration(registration);
-    renderRunning(running);
-    renderFinished(finished);
+    applyFilter('all'); // Default filter
+    const defaultBtn = document.querySelector('.filter-btn[data-filter="all"]');
+    if (defaultBtn) setActiveFilter(defaultBtn);
 
   } catch (err) {
     console.error("Помилка завантаження:", err);
@@ -30,7 +31,8 @@ async function loadHomeTournaments() {
 
 function renderRegistration(items) {
   const container = document.getElementById("registrationList");
-  if (!container) return;
+  const section = document.getElementById("registration-section");
+  if (!container || !section) return;
 
   if (!items.length) {
     container.innerHTML = `<div class="form__muted">Немає майбутніх турнірів</div>`;
@@ -59,7 +61,8 @@ function renderRegistration(items) {
 
 function renderRunning(items) {
   const container = document.getElementById("runningList");
-  if (!container) return;
+  const section = document.getElementById("running-section");
+  if (!container || !section) return;
 
   if (!items.length) {
     container.innerHTML = `<div class="form__muted">Немає активних турнірів</div>`;
@@ -85,7 +88,8 @@ function renderRunning(items) {
 
 function renderFinished(items) {
   const tbody = document.getElementById("finishedList");
-  if (!tbody) return;
+  const section = document.getElementById("finished-section");
+  if (!tbody || !section) return;
 
   if (!items.length) {
     tbody.innerHTML = `
@@ -140,4 +144,51 @@ function escapeHtml(str) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function setupFilters() {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filter = btn.getAttribute('data-filter');
+      applyFilter(filter);
+      setActiveFilter(btn);
+    });
+  });
+  // Default is set in loadHomeTournaments
+}
+
+function applyFilter(filter) {
+  let filteredTournaments = allTournaments;
+
+  if (filter !== 'all') {
+    filteredTournaments = allTournaments.filter(t => t.status === filter);
+  }
+
+  const registration = filteredTournaments.filter(t => t.status === "registration");
+  const running = filteredTournaments.filter(t => t.status === "running");
+  const finished = filteredTournaments.filter(t => t.status === "finished");
+
+  renderRegistration(registration);
+  renderRunning(running);
+  renderFinished(finished);
+
+  // Manage section visibility
+  if (filter === 'all') {
+    document.getElementById('registration-section').style.display = 'block';
+    document.getElementById('running-section').style.display = 'block';
+    document.getElementById('finished-section').style.display = 'block';
+  } else {
+    document.getElementById('registration-section').style.display = filter === 'registration' ? 'block' : 'none';
+    document.getElementById('running-section').style.display = filter === 'running' ? 'block' : 'none';
+    document.getElementById('finished-section').style.display = filter === 'finished' ? 'block' : 'none';
+  }
+}
+
+function setActiveFilter(activeBtn) {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('btn__primary');
+  });
+  activeBtn.classList.add('btn__primary');
 }

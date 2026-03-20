@@ -50,8 +50,11 @@ if (token && user) {
   }
 }
 
-if (!token) {
-  console.log('no token');
+if (!token || !user) {
+  const userStatusBlock = document.getElementById('user-status-block');
+  if (userStatusBlock) {
+    userStatusBlock.style.display = 'none';
+  }
 }
 
      

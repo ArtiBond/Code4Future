@@ -48,7 +48,7 @@
     <div class="muted">Огляд турнірів та вашого прогресу</div>
 
     <!-- QUICK TEAM BLOCK -->
-    <div class="card">
+    <div class="card" id="user-status-block">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
         <div>
           <b style="font-size:16px;">Ваш статус</b>
@@ -117,10 +117,10 @@
 
       <!-- чисто дизайн, без JS -->
       <div class="form__row" style="flex-wrap:wrap;">
-        <a class="btn btn__primary" href="#">Усі</a>
-        <a class="btn" href="#">Registration open</a>
-        <a class="btn" href="#">Running</a>
-        <a class="btn" href="#">Finished</a>
+        <a class="btn filter-btn" data-filter="all" href="#">Усі</a>
+        <a class="btn filter-btn" data-filter="registration" href="#">Registration open</a>
+        <a class="btn filter-btn" data-filter="running" href="#">Running</a>
+        <a class="btn filter-btn" data-filter="finished" href="#">Finished</a>
       </div>
     </div>
 
@@ -128,7 +128,7 @@
     <div class="grid grid__2">
 
       <!-- Registration -->
-     <div class="card">
+     <div class="card" id="registration-section">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
     <div>
       <b style="font-size:16px;">Майбутні турніри</b>
@@ -143,7 +143,7 @@
 </div>
 
       <!-- Running -->
-     <div class="card">
+     <div class="card" id="running-section">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
     <div>
       <b style="font-size:16px;">Активні турніри</b>
@@ -158,7 +158,7 @@
 </div>
 
     <!-- Finished -->
-    <div class="card">
+    <div class="card" id="finished-section">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
     <div>
       <b style="font-size:16px;">Завершені турніри</b>
@@ -175,7 +175,6 @@
         <th>Статус</th>
         <th style="width:220px;">Дії</th>
       </tr>
-    </thead>
     <tbody id="finishedList"></tbody>
   </table>
 </div>
