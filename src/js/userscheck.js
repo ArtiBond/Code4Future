@@ -48,13 +48,24 @@ if (token && user) {
     btn2.href='/leaderboard';
     btn3.href='/team-register';
   }
-}
-
-if (!token || !user) {
+} else {
   const userStatusBlock = document.getElementById('user-status-block');
   if (userStatusBlock) {
     userStatusBlock.style.display = 'none';
   }
+
+  const btn1 = document.getElementById('btn-1');
+  const btn2 = document.getElementById('btn-2');
+  const btn3 = document.getElementById('btn-3');
+
+  btn1.textContent='Турніри';
+  btn2.textContent='Таблиця лідерів';
+  btn3.textContent='Моя команда';
+
+  btn1.href='/tournamentes';
+  btn2.href='/leaderboard';
+  btn3.href='/login';
 }
+
 
      
