@@ -46,7 +46,7 @@ if (token && user) {
 
      btn1.href='/tournamentes';
     btn2.href='/leaderboard';
-    btn3.href='/team-register';
+    btn3.href='/profile';
   }
 } else {
   const userStatusBlock = document.getElementById('user-status-block');

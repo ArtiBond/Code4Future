@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Team = require('../models/team-models');
+const User = require('../models/user-models');
 
 const router = express.Router();
 
@@ -83,6 +84,23 @@ router.post('/', async (req, res, next) => {
       country: (country || '').trim()
     });
 
+    // Update users with team info
+    if (captain.email) {
+      await User.findOneAndUpdate(
+        { email: captain.email },
+        { $addToSet: { teams: { teamId: team._id, tournamentId, role: 'captain' } } }
+      );
+    }
+
+    for (const member of cleanMembers) {
+      if (member.email) {
+        await User.findOneAndUpdate(
+          { email: member.email },
+          { $addToSet: { teams: { teamId: team._id, tournamentId, role: 'member' } } }
+        );
+      }
+    }
+
     return res.json({
       ok: true,
       team
@@ -128,6 +146,23 @@ router.put('/:teamId', async (req, res, next) => {
       });
     }
 
+    // Remove old team info from users
+    if (team.captain.email) {
+      await User.findOneAndUpdate(
+        { email: team.captain.email },
+        { $pull: { teams: { teamId: team._id } } }
+      );
+    }
+
+    for (const member of team.members) {
+      if (member.email) {
+        await User.findOneAndUpdate(
+          { email: member.email },
+          { $pull: { teams: { teamId: team._id } } }
+        );
+      }
+    }
+
     team.teamName = teamName.trim();
     team.captain = {
       fullName: (captain.fullName || '').trim(),
@@ -150,6 +185,23 @@ router.put('/:teamId', async (req, res, next) => {
     team.country = (country || '').trim();
 
     await team.save();
+
+    // Add new team info to users
+    if (team.captain.email) {
+      await User.findOneAndUpdate(
+        { email: team.captain.email },
+        { $addToSet: { teams: { teamId: team._id, tournamentId: team.tournamentId, role: 'captain' } } }
+      );
+    }
+
+    for (const member of team.members) {
+      if (member.email) {
+        await User.findOneAndUpdate(
+          { email: member.email },
+          { $addToSet: { teams: { teamId: team._id, tournamentId: team.tournamentId, role: 'member' } } }
+        );
+      }
+    }
 
     return res.json({
       ok: true,
@@ -179,6 +231,23 @@ router.delete('/:teamId', async (req, res, next) => {
         ok: false,
         message: 'Команду не знайдено'
       });
+    }
+
+    // Remove team info from users
+    if (deleted.captain.email) {
+      await User.findOneAndUpdate(
+        { email: deleted.captain.email },
+        { $pull: { teams: { teamId: deleted._id } } }
+      );
+    }
+
+    for (const member of deleted.members) {
+      if (member.email) {
+        await User.findOneAndUpdate(
+          { email: member.email },
+          { $pull: { teams: { teamId: deleted._id } } }
+        );
+      }
     }
 
     return res.json({

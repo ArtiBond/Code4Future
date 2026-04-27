@@ -22,6 +22,33 @@ const teamsEmpty = document.getElementById('teams-empty');
 
 let currentEditId = null;
 
+// Check if user is captain and pre-fill captain fields
+async function prefillCaptainFields() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch('/me', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) return;
+
+    const user = await res.json();
+    if (user.role === 'Капітан') {
+      captainFullNameInput.value = user.name || '';
+      captainEmailInput.value = user.email || '';
+      // Optionally disable email field
+      captainEmailInput.disabled = true;
+      captainEmailInput.style.opacity = '0.6';
+    }
+  } catch (err) {
+    console.error('Failed to prefill captain fields:', err);
+  }
+}
+
+// Call on page load
+prefillCaptainFields();
+
 function escapeHtml(value) {
   return String(value || '')
     .replaceAll('&', '&amp;')
@@ -31,12 +58,78 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function debounce(fn, delay = 200) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
+async function searchUsersByNickname(query) {
+  if (!query || query.trim().length < 2) {
+    return [];
+  }
+
+  try {
+    const res = await fetch(`/users?search=${encodeURIComponent(query.trim())}`);
+    const data = await res.json();
+    return data.ok ? data.users : [];
+  } catch (err) {
+    console.error('Search users error:', err);
+    return [];
+  }
+}
+
+function renderMemberSearchResults(row, users) {
+  const suggestions = row.querySelector('.member-search-suggestions');
+  suggestions.innerHTML = '';
+
+  if (!users.length) {
+    suggestions.innerHTML = '<div class="member-search-empty" style="padding:6px 8px;color:var(--muted);">Нічого не знайдено</div>';
+    return;
+  }
+
+  users.forEach((user) => {
+    const item = document.createElement('div');
+    item.className = 'member-search-item';
+    item.textContent = `${user.name} — ${user.email}`;
+    item.style.cursor = 'pointer';
+    item.style.padding = '6px 8px';
+    item.style.borderBottom = '1px solid var(--border)';
+    item.style.background = 'var(--panel)';
+    item.style.color = 'var(--text)';
+
+    item.addEventListener('mouseenter', () => {
+      item.style.background = 'var(--panel2)';
+    });
+
+    item.addEventListener('mouseleave', () => {
+      item.style.background = 'var(--panel)';
+    });
+
+    item.addEventListener('click', () => {
+      row.querySelector('.member-fullName').value = user.name || '';
+      row.querySelector('.member-email').value = user.email || '';
+      row.querySelector('.member-nickname').value = user.name || '';
+      suggestions.innerHTML = '';
+    });
+
+    suggestions.appendChild(item);
+  });
+}
+
 function createMemberRow(member = {}) {
   const row = document.createElement('div');
   row.className = 'grid__row member-row';
   row.style.marginTop = '10px';
 
   row.innerHTML = `
+    <div class="form__field" style="flex:1 1 240px;">
+      <label>Нікнейм / ПІБ</label>
+      <input class="form__input member-nickname" placeholder="Почніть вводити нікнейм" value="${escapeHtml(member.nickname || member.fullName || '')}">
+      <div class="member-search-suggestions" style="background:var(--panel);border:1px solid var(--border);border-top:0;max-height:220px;overflow:auto;color:var(--text);"></div>
+    </div>
     <div class="form__field">
       <label>ПІБ</label>
       <input class="form__input member-fullName" placeholder="Учасник" value="${escapeHtml(member.fullName || '')}">
@@ -57,6 +150,17 @@ function createMemberRow(member = {}) {
       <button type="button" class="btn btn-remove-member">Видалити</button>
     </div>
   `;
+
+  const nicknameInput = row.querySelector('.member-nickname');
+  const debouncedSearch = debounce(async () => {
+    const query = nicknameInput.value.trim();
+    const results = await searchUsersByNickname(query);
+    renderMemberSearchResults(row, results);
+  }, 250);
+
+  nicknameInput.addEventListener('input', () => {
+    debouncedSearch();
+  });
 
   row.querySelector('.btn-remove-member').addEventListener('click', () => {
     row.remove();

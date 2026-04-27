@@ -61,6 +61,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.location.href = '/login';
   }
 
+  // Load user teams
+  try {
+    const teamsRes = await authFetch('/me/teams');
+    if (teamsRes.ok) {
+      const { teams } = await teamsRes.json();
+      renderUserTeams(teams);
+      updateMyTeamInfo(teams);
+    }
+  } catch (err) {
+    console.error('Failed to load teams', err);
+  }
+
   const logoutBtn = document.getElementById('btn-logout');
 
 if (logoutBtn) {
@@ -80,6 +92,14 @@ if (logoutBtn) {
     } catch (err) {
       console.error('Logout error:', err);
     }
+  });
+}
+
+const teamReg = document.getElementById('cap-reg');
+
+if(teamReg) {
+  teamReg.addEventListener('click', () => {
+    window.location.href = '/tournamentes';
   });
 }
 
@@ -108,4 +128,87 @@ async function loadFlag(countryCode) {
 loadFlag(user.country);
 
 
-}); 
+});
+
+function renderUserTeams(teams) {
+  const tbody = document.querySelector('#teams-tbody');
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+
+  if (!teams.length) {
+    tbody.innerHTML = '<tr><td colspan="3" class="form__muted">Немає команд</td></tr>';
+    return;
+  }
+
+  teams.forEach((teamInfo) => {
+    const team = teamInfo.teamId;
+    const tournament = teamInfo.tournamentId;
+    if (!team || !tournament) return;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${escapeHtml(team.teamName)}</td>
+      <td>${escapeHtml(tournament.name)}</td>
+      <td>${teamInfo.role === 'captain' ? 'Капітан' : 'Учасник'}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function escapeHtml(value) {
+  return String(value || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function updateMyTeamInfo(teams) {
+  const infoEl = document.getElementById('my-team-info');
+  const teamBlock = document.getElementById('team-block');
+  if (!infoEl || !teamBlock) return;
+
+  if (!teams.length) {
+    infoEl.innerHTML = 'Команди немає';
+    renderTeamMembers([]);
+    return;
+  }
+
+  // Show first team as "current"
+  const firstTeam = teams[0];
+  const team = firstTeam.teamId;
+  const tournament = firstTeam.tournamentId;
+  if (team && tournament) {
+    infoEl.innerHTML = `Назва: <b>${escapeHtml(team.teamName)}</b> | Турнір: <b>${escapeHtml(tournament.name)}</b> | Роль: <b>${firstTeam.role === 'captain' ? 'Капітан' : 'Учасник'}</b>`;
+    const allMembers = [team.captain, ...(team.members || [])];
+    renderTeamMembers(allMembers);
+  } else {
+    infoEl.innerHTML = 'Команди немає';
+    renderTeamMembers([]);
+  }
+}
+
+function renderTeamMembers(members) {
+  const tbody = document.getElementById('team-members-tbody');
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+
+  if (!members.length) {
+    tbody.innerHTML = '<tr><td colspan="4" class="form__muted">Немає учасників</td></tr>';
+    return;
+  }
+
+  members.forEach((member) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${escapeHtml(member.fullName)}</td>
+      <td>${escapeHtml(member.email)}</td>
+      <td>${escapeHtml(member.school)}</td>
+      <td>${escapeHtml(member.className)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+} 

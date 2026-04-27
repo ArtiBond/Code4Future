@@ -32,6 +32,8 @@ router.post('/refresh', userController.refresh);
 
 // user info
 router.get('/me', authMiddleware, userController.getMe);
+router.get('/me/teams', authMiddleware, userController.getUserTeams);
+router.get('/users', userController.searchUsers);
 
 router.get('', userController.homePage);
 router.get('/login', userController.loginPage);

@@ -3,6 +3,12 @@ const userService = require('../service/user-service');
 const {validationResult} = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 const tokenService = require('../service/token-service');
+const User = require('../models/user-models');
+
+function escapeRegex(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 class UserController {
     async registration(req, res, next) {
         try {
@@ -115,6 +121,36 @@ class UserController {
             // user data attached by authMiddleware
             const user = req.user;
             return res.json(user);
+        } catch (e) {
+            next(e);
+        }
+    }
+    async getUserTeams(req, res, next) {
+        try {
+            const user = await User.findById(req.user.id).populate({
+                path: 'teams.teamId',
+                populate: { path: 'tournamentId', select: 'name description' }
+            });
+            return res.json({ teams: user.teams });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async searchUsers(req, res, next) {
+        try {
+            const search = String(req.query.search || '').trim();
+
+            if (!search) {
+                return res.json({ ok: true, users: [] });
+            }
+
+            const regex = new RegExp(escapeRegex(search), 'i');
+            const users = await User.find({ name: regex })
+                .limit(20)
+                .select('name email country role');
+
+            return res.json({ ok: true, users });
         } catch (e) {
             next(e);
         }
